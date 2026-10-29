@@ -4,7 +4,7 @@ Personal website of Fotoh Mbaku. A single static page: `index.html` with `headsh
 
 ## Editing experience
 
-Work history lives in the `jobs` array in the `<script>` at the bottom of `index.html`. Each entry has the company, employment type, an optional description, a list of roles (`start`/`end` as `YYYY-MM`, `end: null` for current roles) and skill tags. Update `NOW` in the same script when durations should roll forward.
+Work history lives in the `jobs` array in the `<script>` at the bottom of `index.html`. Each entry has the company, employment type, an optional description, a list of roles (`start`/`end` as `YYYY-MM`, `end: null` for current roles) and skill tags. Durations for current roles update automatically from today's date.
 
 ## Running locally
 

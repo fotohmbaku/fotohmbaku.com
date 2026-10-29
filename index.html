@@ -207,7 +207,8 @@ footer { padding-block: 2rem 3rem; color: var(--muted); font: 400 0.75rem/1.6 va
 
 <script>
 // Months are "YYYY-MM"; end null means present.
-const NOW = "2026-10";
+const d = new Date();
+const NOW = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
 const jobs = [
   { org: "L3Harris Technologies", type: "Full-time · On-site", desc: "Program Management",
     roles: [
