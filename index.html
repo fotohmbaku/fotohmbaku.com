@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fotoh Mbaku</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Fotoh Mbaku: business intelligence analyst at L3Harris and founder of Ctrl-F4, an analytics consulting firm.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single reading column with the experience list as the centerpiece. */
+:root {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --fg: #0f1a24;
+  --muted: #5a6875;
+  --line: #e2e7eb;
+  --accent: #0b6e6a;
+  --accent-soft: #d3ebe8;
+  --bar-2: #2c4b66;
+  color-scheme: light;
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  --font-body: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; }
+img { max-width: 100%; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font: 400 1rem/1.6 var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+.wrap {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
+.label {
+  font: 500 0.75rem/1 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Header */
+.top { padding-block: 1.5rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.mark { font: 600 0.95rem/1 var(--font-mono); color: var(--fg); text-decoration: none; }
+.mark span { color: var(--accent); }
+.top nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+.top nav a { color: var(--muted); text-decoration: none; font-size: 0.9rem; }
+.top nav a:hover { color: var(--fg); }
+
+/* Hero */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 18rem);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: end;
+  padding-block: clamp(2rem, 6vw, 4.5rem) clamp(2.5rem, 6vw, 4rem);
+  border-bottom: 1px solid var(--line);
+}
+.hero h1 {
+  font-size: clamp(2.75rem, 8vw, 5.25rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+}
+.hero h1.name {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  column-gap: clamp(0.75rem, 2vw, 1.25rem);
+  align-items: center;
+}
+.name .first { grid-column: 1; grid-row: 1; }
+.name .last { grid-column: 1; grid-row: 2; }
+.name .say {
+  grid-column: 2; grid-row: 1 / span 2; align-self: center;
+  font: italic 500 clamp(0.95rem, 2vw, 1.25rem)/1 var(--font-mono);
+  letter-spacing: 0.02em; color: var(--accent);
+  padding: 0.45em 0.7em; border: 1px solid var(--accent); border-radius: 999px;
+  background: var(--accent-soft); white-space: nowrap;
+}
+.name .slash { opacity: 0.55; font-style: normal; margin-inline: 0.15em; }
+.hero .role { margin: 1.25rem 0 0; font: 600 clamp(1.05rem, 2vw, 1.25rem)/1.4 var(--font-display); }
+.hero .role em { font-style: normal; color: var(--accent); }
+.hero p.lede { max-width: 38rem; color: var(--muted); margin: 1rem 0 0; font-size: 1.05rem; }
+.hero .links { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.75rem; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.65rem 1.1rem; border-radius: 999px;
+  font: 500 0.9rem/1 var(--font-body); text-decoration: none;
+  border: 1px solid var(--line); color: var(--fg); background: var(--surface);
+}
+.btn.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.btn:hover { border-color: var(--accent); }
+.portrait { position: relative; margin: 0; }
+.portrait img {
+  display: block; width: 100%; height: auto; max-width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
+  border-radius: 14px; filter: saturate(0.92);
+}
+.portrait figcaption {
+  box-shadow: 0 1px 3px rgba(15, 26, 36, 0.15);
+  position: absolute; left: 0.75rem; bottom: 0.75rem;
+  font: 500 0.7rem/1 var(--font-mono); letter-spacing: 0.06em;
+  background: var(--surface); color: var(--fg); padding: 0.45rem 0.6rem; border-radius: 6px;
+}
+.portrait figcaption b { color: var(--accent); font-weight: 500; }
+
+/* Section shell */
+section.block { padding-block: clamp(2.5rem, 6vw, 4rem); border-bottom: 1px solid var(--line); }
+.block-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.75rem; }
+.block-head h2 { font-size: clamp(1.6rem, 3.5vw, 2.1rem); font-weight: 600; letter-spacing: -0.02em; }
+
+/* Experience list */
+.jobs { display: grid; gap: 0; }
+.job {
+  display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 1.5rem;
+  padding-block: 1.75rem; border-top: 1px solid var(--line);
+}
+.job:first-child { border-top: 0; padding-top: 0; }
+.job .when { font: 400 0.8rem/1.5 var(--font-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.job .when b { display: block; color: var(--fg); font-weight: 500; }
+.job h3 { font-size: 1.35rem; font-weight: 600; letter-spacing: -0.01em; }
+.job .meta { color: var(--muted); font-size: 0.9rem; margin-top: 0.15rem; }
+.job p { margin: 0.75rem 0 0; max-width: 40rem; }
+.roles { list-style: none; margin: 0.9rem 0 0; padding: 0; display: grid; gap: 0.6rem; }
+.roles li { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding-left: 1rem; border-left: 2px solid var(--line); }
+.roles li.now { border-left-color: var(--accent); }
+.roles .rt { font-weight: 500; }
+.roles .rd { font: 400 0.8rem/1.6 var(--font-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.9rem; }
+.tag { font: 500 0.72rem/1 var(--font-mono); padding: 0.4rem 0.55rem; border-radius: 5px; background: var(--accent-soft); color: var(--fg); }
+
+/* Contact */
+.contact p { margin: 0 0 1.25rem; color: var(--muted); max-width: 30rem; }
+footer { padding-block: 2rem 3rem; color: var(--muted); font: 400 0.75rem/1.6 var(--font-mono); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+
+@media (max-width: 720px) {
+  .hero { grid-template-columns: 1fr; }
+  .portrait { order: -1; max-width: 13rem; }
+  .job { grid-template-columns: 1fr; gap: 0.5rem; }
+}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="#top">fotohmbaku<span>.com</span></a>
+    <nav aria-label="Sections">
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="top">
+    <div>
+      <div class="label">Business intelligence · Data architecture</div>
+      <h1 class="name" style="margin-top:1rem">
+        <span class="first">Fotoh</span>
+        <span class="say" aria-label="pronounced Pho-tah"><span class="slash">/</span>Pho-tah<span class="slash">/</span></span>
+        <span class="last">Mbaku</span>
+      </h1>
+      <p class="role">Business Intelligence Analyst at <em>L3Harris</em>. Founder of <em>Ctrl-F4</em>.</p>
+      <p class="lede">I turn messy operational data into analytics people act on. Five years across financial regulation, investment banking and defense, working mostly in Python and SQL.</p>
+      <div class="links">
+        <a class="btn primary" href="#experience">See my experience</a>
+        <a class="btn" href="https://github.com/fotohmbaku" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <figure class="portrait">
+      <img src="headshot.jpg" alt="Portrait of Fotoh Mbaku" width="560" height="700">
+      <figcaption><b>●</b> Currently at L3Harris</figcaption>
+    </figure>
+  </section>
+
+  <section class="block" id="experience">
+    <div class="block-head">
+      <h2>Experience</h2>
+      <span class="label" id="total"></span>
+    </div>
+    <div class="jobs" id="jobs"></div>
+  </section>
+
+  <section class="block contact" id="contact">
+    <div class="block-head"><h2>Get in touch</h2></div>
+    <p>Looking for help with data architecture, analytics or machine learning? Ctrl-F4 takes on consulting work.</p>
+    <div class="links" style="display:flex;gap:.75rem;flex-wrap:wrap">
+      <a class="btn primary" href="https://github.com/fotohmbaku" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>© <span id="yr">2026</span> Fotoh Mbaku</span>
+    <span>SELECT * FROM career ORDER BY start DESC;</span>
+  </footer>
+</div>
+
+<script>
+// Months are "YYYY-MM"; end null means present.
+const NOW = "2026-10";
+const jobs = [
+  { org: "L3Harris Technologies", type: "Full-time · On-site", desc: "Program Management",
+    roles: [
+      { title: "Specialist, Business Intelligence Analyst", start: "2026-02", end: null },
+      { title: "Senior Associate, Business Intelligence Analyst", start: "2023-12", end: "2026-02" }
+    ], tags: ["Python", "SQL", "Program management"] },
+  { org: "Ctrl-F4", type: "Self-employed", desc: "Analytics consulting firm focused on advanced data architecture, machine learning and real-time intelligence.",
+    roles: [ { title: "Founder", start: "2024-04", end: null } ],
+    tags: ["Data architecture", "Machine learning", "Real-time intelligence"] },
+  { org: "Goldman Sachs", type: "Full-time · On-site", desc: "Investment Banking",
+    roles: [
+      { title: "Senior Business Intelligence Analyst", start: "2023-10", end: "2023-12" },
+      { title: "Business Intelligence Analyst", start: "2022-09", end: "2023-10" }
+    ], tags: ["Python", "SQL"] },
+  { org: "J.P. Morgan", type: "Full-time · On-site",
+    roles: [ { title: "Business Intelligence Analyst", start: "2021-08", end: "2022-09" } ],
+    tags: ["Python", "SQL"] },
+  { org: "U.S. Securities and Exchange Commission", type: "Internship",
+    roles: [ { title: "Analytics Intern", start: "2021-05", end: "2021-08" } ], tags: [] }
+];
+
+const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const idx = m => { const [y, mo] = m.split("-").map(Number); return y * 12 + (mo - 1); };
+const fmt = m => m ? `${MONTHS[idx(m) % 12]} ${Math.floor(idx(m) / 12)}` : "Present";
+// LinkedIn-style inclusive month count
+const span = (s, e) => {
+  const n = idx(e || NOW) - idx(s) + 1;
+  const y = Math.floor(n / 12), mo = n % 12;
+  return [y && `${y} yr${y > 1 ? "s" : ""}`, mo && `${mo} mo${mo > 1 ? "s" : ""}`].filter(Boolean).join(" ");
+};
+const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+// Experience list
+document.getElementById("jobs").innerHTML = jobs.map(j => {
+  const first = j.roles[j.roles.length - 1].start, last = j.roles[0].end;
+  return `<article class="job">
+    <div class="when"><b>${fmt(first)} – ${fmt(last)}</b>${span(first, last)}</div>
+    <div>
+      <h3>${esc(j.org)}</h3>
+      <div class="meta">${esc(j.type)}</div>
+      ${j.desc ? `<p>${esc(j.desc)}</p>` : ""}
+      <ul class="roles">${j.roles.map(r => `<li${r.end ? "" : ' class="now"'}><span class="rt">${esc(r.title)}</span><span class="rd">${fmt(r.start)} – ${fmt(r.end)} · ${span(r.start, r.end)}</span></li>`).join("")}</ul>
+      ${j.tags.length ? `<div class="tags">${j.tags.map(t => `<span class="tag">${esc(t)}</span>`).join("")}</div>` : ""}
+    </div>
+  </article>`;
+}).join("");
+document.getElementById("total").textContent = `${span("2021-05", null)} in data`;
+</script>
+</body>
+</html>
