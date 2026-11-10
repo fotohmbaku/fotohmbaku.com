@@ -26,6 +26,7 @@
   "image": "https://fotohmbaku.com/headshot.jpg",
   "jobTitle": "Business Intelligence Analyst",
   "worksFor": { "@type": "Organization", "name": "L3Harris Technologies" },
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "University of Utah" },
   "knowsAbout": ["Business intelligence", "Python", "SQL", "Data architecture", "Machine learning"],
   "sameAs": [
     "https://www.linkedin.com/in/fotohmbaku/",
@@ -160,6 +161,12 @@ section.block { padding-block: clamp(2.5rem, 6vw, 4rem); border-bottom: 1px soli
 .job .when b { display: block; color: var(--fg); font-weight: 500; }
 .job h3 { font-size: 1.35rem; font-weight: 600; letter-spacing: -0.01em; }
 .job .meta { color: var(--muted); font-size: 0.9rem; margin-top: 0.15rem; }
+.org { display: flex; align-items: center; gap: 0.9rem; }
+.org > div { min-width: 0; }
+.logo {
+  flex: none; width: 48px; height: 48px; border-radius: 10px;
+  border: 1px solid var(--line); background: var(--surface); object-fit: cover;
+}
 .job p { margin: 0.75rem 0 0; max-width: 40rem; }
 .roles { list-style: none; margin: 0.9rem 0 0; padding: 0; display: grid; gap: 0.6rem; }
 .roles li { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding-left: 1rem; border-left: 2px solid var(--line); }
@@ -187,6 +194,7 @@ footer { padding-block: 2rem 3rem; color: var(--muted); font: 400 0.75rem/1.6 va
     <a class="mark" href="#top">fotohmbaku<span>.com</span></a>
     <nav aria-label="Sections">
       <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
@@ -220,6 +228,27 @@ footer { padding-block: 2rem 3rem; color: var(--muted); font: 400 0.75rem/1.6 va
     <div class="jobs" id="jobs"></div>
   </section>
 
+  <section class="block" id="education">
+    <div class="block-head">
+      <h2>Education</h2>
+    </div>
+    <div class="jobs">
+      <article class="job">
+        <div class="when"><b>M.S. · B.S.</b></div>
+        <div>
+          <div class="org">
+            <img class="logo" src="logos/utah.png" alt="University of Utah logo" width="48" height="48" loading="lazy">
+            <div><h3>University of Utah</h3><div class="meta">Salt Lake City, Utah</div></div>
+          </div>
+          <ul class="roles">
+            <li><span class="rt">Master of Science, Information Systems</span></li>
+            <li><span class="rt">Bachelor of Science, Economics</span></li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
   <section class="block contact" id="contact">
     <div class="block-head"><h2>Get in touch</h2></div>
     <p>Looking for help with data architecture, analytics or machine learning? Ctrl-F4 takes on consulting work.</p>
@@ -240,23 +269,23 @@ footer { padding-block: 2rem 3rem; color: var(--muted); font: 400 0.75rem/1.6 va
 const d = new Date();
 const NOW = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
 const jobs = [
-  { org: "L3Harris Technologies", type: "Full-time · On-site", desc: "Program Management",
+  { org: "L3Harris Technologies", logo: "logos/l3harris.png", type: "Full-time · On-site", desc: "Program Management",
     roles: [
       { title: "Specialist, Business Intelligence Analyst", start: "2026-02", end: null },
       { title: "Senior Associate, Business Intelligence Analyst", start: "2023-12", end: "2026-02" }
     ], tags: ["Python", "SQL", "Program management"] },
-  { org: "Ctrl-F4", type: "Self-employed", desc: "Analytics consulting firm focused on advanced data architecture, machine learning and real-time intelligence.",
+  { org: "Ctrl-F4", logo: "logos/ctrlf4.png", type: "Self-employed", desc: "Analytics consulting firm focused on advanced data architecture, machine learning and real-time intelligence.",
     roles: [ { title: "Founder", start: "2024-04", end: null } ],
     tags: ["Data architecture", "Machine learning", "Real-time intelligence"] },
-  { org: "Goldman Sachs", type: "Full-time · On-site", desc: "Investment Banking",
+  { org: "Goldman Sachs", logo: "logos/goldman.png", type: "Full-time · On-site", desc: "Investment Banking",
     roles: [
       { title: "Senior Business Intelligence Analyst", start: "2023-10", end: "2023-12" },
       { title: "Business Intelligence Analyst", start: "2022-09", end: "2023-10" }
     ], tags: ["Python", "SQL"] },
-  { org: "J.P. Morgan", type: "Full-time · On-site",
+  { org: "J.P. Morgan", logo: "logos/jpmorgan.png", type: "Full-time · On-site",
     roles: [ { title: "Business Intelligence Analyst", start: "2021-08", end: "2022-09" } ],
     tags: ["Python", "SQL"] },
-  { org: "U.S. Securities and Exchange Commission", type: "Internship",
+  { org: "U.S. Securities and Exchange Commission", logo: "logos/sec.png", type: "Internship",
     roles: [ { title: "Analytics Intern", start: "2021-05", end: "2021-08" } ], tags: [] }
 ];
 
@@ -277,8 +306,10 @@ document.getElementById("jobs").innerHTML = jobs.map(j => {
   return `<article class="job">
     <div class="when"><b>${fmt(first)} – ${fmt(last)}</b>${span(first, last)}</div>
     <div>
-      <h3>${esc(j.org)}</h3>
-      <div class="meta">${esc(j.type)}</div>
+      <div class="org">
+        <img class="logo" src="${j.logo}" alt="${esc(j.org)} logo" width="48" height="48" loading="lazy">
+        <div><h3>${esc(j.org)}</h3><div class="meta">${esc(j.type)}</div></div>
+      </div>
       ${j.desc ? `<p>${esc(j.desc)}</p>` : ""}
       <ul class="roles">${j.roles.map(r => `<li${r.end ? "" : ' class="now"'}><span class="rt">${esc(r.title)}</span><span class="rd">${fmt(r.start)} – ${fmt(r.end)} · ${span(r.start, r.end)}</span></li>`).join("")}</ul>
       ${j.tags.length ? `<div class="tags">${j.tags.map(t => `<span class="tag">${esc(t)}</span>`).join("")}</div>` : ""}
