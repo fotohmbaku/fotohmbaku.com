@@ -3,9 +3,35 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Fotoh Mbaku</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Fotoh Mbaku: business intelligence analyst at L3Harris and founder of Ctrl-F4, an analytics consulting firm.">
+<title>Fotoh Mbaku | Business Intelligence Analyst</title>
+<meta name="description" content="Fotoh Mbaku is a business intelligence analyst at L3Harris and the founder of Ctrl-F4, an analytics consulting firm. Previously at Goldman Sachs and J.P. Morgan.">
+<link rel="canonical" href="https://fotohmbaku.com/">
+<meta name="author" content="Fotoh Mbaku">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Fotoh Mbaku">
+<meta property="og:description" content="Business intelligence analyst at L3Harris and founder of Ctrl-F4.">
+<meta property="og:url" content="https://fotohmbaku.com/">
+<meta property="og:image" content="https://fotohmbaku.com/headshot.jpg">
+<meta property="profile:first_name" content="Fotoh">
+<meta property="profile:last_name" content="Mbaku">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Fotoh Mbaku",
+  "givenName": "Fotoh",
+  "familyName": "Mbaku",
+  "url": "https://fotohmbaku.com/",
+  "image": "https://fotohmbaku.com/headshot.jpg",
+  "jobTitle": "Business Intelligence Analyst",
+  "worksFor": { "@type": "Organization", "name": "L3Harris Technologies" },
+  "knowsAbout": ["Business intelligence", "Python", "SQL", "Data architecture", "Machine learning"],
+  "sameAs": [
+    "https://github.com/fotohmbaku"
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -74,12 +100,14 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
   line-height: 0.95;
   letter-spacing: -0.035em;
 }
-.hero h1.name {
+.hero .name {
+  margin-top: 1rem;
   display: inline-grid;
   grid-template-columns: auto auto;
   column-gap: clamp(0.75rem, 2vw, 1.25rem);
   align-items: center;
 }
+.name h1 { display: contents; }
 .name .first { grid-column: 1; grid-row: 1; }
 .name .last { grid-column: 1; grid-row: 2; }
 .name .say {
@@ -165,11 +193,10 @@ footer { padding-block: 2rem 3rem; color: var(--muted); font: 400 0.75rem/1.6 va
   <section class="hero" id="top">
     <div>
       <div class="label">Business intelligence · Data architecture</div>
-      <h1 class="name" style="margin-top:1rem">
-        <span class="first">Fotoh</span>
+      <div class="name">
+        <h1><span class="first">Fotoh</span> <span class="last">Mbaku</span></h1>
         <span class="say" aria-label="pronounced Pho-tah"><span class="slash">/</span>Pho-tah<span class="slash">/</span></span>
-        <span class="last">Mbaku</span>
-      </h1>
+      </div>
       <p class="role">Business Intelligence Analyst at <em>L3Harris</em>. Founder of <em>Ctrl-F4</em>.</p>
       <p class="lede">I turn messy operational data into analytics people act on. Five years across financial regulation, investment banking and defense, working mostly in Python and SQL.</p>
       <div class="links">
