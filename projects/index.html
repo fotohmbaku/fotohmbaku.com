@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Projects | Fotoh Mbaku</title>
+<meta name="description" content="Side projects by Fotoh Mbaku, including HOLLOW — Path of the Sword, a 3D wuxia sword-duelling game.">
+<link rel="canonical" href="https://fotohmbaku.com/projects/">
+<meta name="author" content="Fotoh Mbaku">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Projects | Fotoh Mbaku">
+<meta property="og:description" content="Side projects by Fotoh Mbaku, including HOLLOW — Path of the Sword.">
+<meta property="og:url" content="https://fotohmbaku.com/projects/">
+<meta property="og:image" content="https://fotohmbaku.com/projects/hollow-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single reading column with the experience list as the centerpiece. */
+:root {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --fg: #0f1a24;
+  --muted: #5a6875;
+  --line: #e2e7eb;
+  --accent: #0b6e6a;
+  --accent-soft: #d3ebe8;
+  --bar-2: #2c4b66;
+  color-scheme: light;
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  --font-body: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; }
+img { max-width: 100%; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font: 400 1rem/1.6 var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+.wrap {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
+.label {
+  font: 500 0.75rem/1 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Header */
+.top { padding-block: 1.5rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.mark { font: 600 0.95rem/1 var(--font-mono); color: var(--fg); text-decoration: none; }
+.mark span { color: var(--accent); }
+.top nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+.top nav a { color: var(--muted); text-decoration: none; font-size: 0.9rem; }
+.top nav a:hover { color: var(--fg); }
+
+/* Hero */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 18rem);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: end;
+  padding-block: clamp(2rem, 6vw, 4.5rem) clamp(2.5rem, 6vw, 4rem);
+  border-bottom: 1px solid var(--line);
+}
+.hero h1 {
+  font-size: clamp(2.75rem, 8vw, 5.25rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+}
+.hero .name {
+  margin-top: 1rem;
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  column-gap: clamp(0.75rem, 2vw, 1.25rem);
+  align-items: center;
+}
+.name h1 { display: contents; }
+.name .first { grid-column: 1; grid-row: 1; }
+.name .last { grid-column: 1; grid-row: 2; }
+.name .say {
+  grid-column: 2; grid-row: 1 / span 2; align-self: center;
+  font: italic 500 clamp(0.95rem, 2vw, 1.25rem)/1 var(--font-mono);
+  letter-spacing: 0.02em; color: var(--accent);
+  padding: 0.45em 0.7em; border: 1px solid var(--accent); border-radius: 999px;
+  background: var(--accent-soft); white-space: nowrap;
+}
+.name .slash { opacity: 0.55; font-style: normal; margin-inline: 0.15em; }
+.hero .role { margin: 1.25rem 0 0; font: 600 clamp(1.05rem, 2vw, 1.25rem)/1.4 var(--font-display); }
+.hero .role em { font-style: normal; color: var(--accent); }
+.hero p.lede { max-width: 38rem; color: var(--muted); margin: 1rem 0 0; font-size: 1.05rem; }
+.hero .links { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.75rem; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.65rem 1.1rem; border-radius: 999px;
+  font: 500 0.9rem/1 var(--font-body); text-decoration: none;
+  border: 1px solid var(--line); color: var(--fg); background: var(--surface);
+}
+.btn.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.btn:hover { border-color: var(--accent); }
+.portrait { position: relative; margin: 0; }
+.portrait img {
+  display: block; width: 100%; height: auto; max-width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
+  border-radius: 14px; filter: saturate(0.92);
+}
+.portrait figcaption {
+  box-shadow: 0 1px 3px rgba(15, 26, 36, 0.15);
+  position: absolute; left: 0.75rem; bottom: 0.75rem;
+  font: 500 0.7rem/1 var(--font-mono); letter-spacing: 0.06em;
+  background: var(--surface); color: var(--fg); padding: 0.45rem 0.6rem; border-radius: 6px;
+}
+.portrait figcaption b { color: var(--accent); font-weight: 500; }
+
+/* Section shell */
+section.block { padding-block: clamp(2.5rem, 6vw, 4rem); border-bottom: 1px solid var(--line); }
+.block-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.75rem; }
+.block-head h2 { font-size: clamp(1.6rem, 3.5vw, 2.1rem); font-weight: 600; letter-spacing: -0.02em; }
+
+/* Experience list */
+.jobs { display: grid; gap: 0; }
+.job {
+  display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 1.5rem;
+  padding-block: 1.75rem; border-top: 1px solid var(--line);
+}
+.job:first-child { border-top: 0; padding-top: 0; }
+.job .when { font: 400 0.8rem/1.5 var(--font-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.job .when b { display: block; color: var(--fg); font-weight: 500; }
+.job h3 { font-size: 1.35rem; font-weight: 600; letter-spacing: -0.01em; }
+.job .meta { color: var(--muted); font-size: 0.9rem; margin-top: 0.15rem; }
+.org { display: flex; align-items: center; gap: 0.9rem; }
+.org > div { min-width: 0; }
+.logo {
+  flex: none; width: 48px; height: 48px; border-radius: 10px;
+  border: 1px solid var(--line); background: var(--surface); object-fit: cover;
+}
+.job p { margin: 0.75rem 0 0; max-width: 40rem; }
+.roles { list-style: none; margin: 0.9rem 0 0; padding: 0; display: grid; gap: 0.6rem; }
+.roles li { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding-left: 1rem; border-left: 2px solid var(--line); }
+.roles li.now { border-left-color: var(--accent); }
+.roles .rt { font-weight: 500; }
+.roles .rd { font: 400 0.8rem/1.6 var(--font-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.9rem; }
+.tag { font: 500 0.72rem/1 var(--font-mono); padding: 0.4rem 0.55rem; border-radius: 5px; background: var(--accent-soft); color: var(--fg); }
+
+/* Contact */
+.contact p { margin: 0 0 1.25rem; color: var(--muted); max-width: 30rem; }
+footer { padding-block: 2rem 3rem; color: var(--muted); font: 400 0.75rem/1.6 var(--font-mono); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+
+@media (max-width: 720px) {
+  .hero { grid-template-columns: 1fr; }
+  .portrait { order: -1; max-width: 13rem; }
+  .job { grid-template-columns: 1fr; gap: 0.5rem; }
+}
+
+/* Projects */
+.project { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3rem); align-items: start; }
+.project .cover { margin: 0; }
+.project .cover img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); }
+.project .cover figcaption { margin-top: 0.6rem; color: var(--muted); font: 400 0.75rem/1.5 var(--font-mono); }
+.project h3 { font-size: clamp(1.5rem, 3vw, 1.9rem); font-weight: 600; letter-spacing: -0.015em; }
+.project .tagline { margin: 0.35rem 0 0; color: var(--accent); font: italic 500 0.95rem/1.4 var(--font-mono); }
+.project p { margin: 1rem 0 0; }
+.facts { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; gap: 0.6rem; }
+.facts li { padding-left: 1rem; border-left: 2px solid var(--line); }
+.facts b { font-weight: 600; }
+.project .links { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem; }
+.top nav a[aria-current="page"] { color: var(--fg); }
+.intro { padding-block: clamp(2rem, 6vw, 4rem) clamp(1.5rem, 4vw, 2.5rem); border-bottom: 1px solid var(--line); }
+.intro h1 { font-size: clamp(2.5rem, 7vw, 4.25rem); font-weight: 800; line-height: 1; letter-spacing: -0.035em; margin-top: 0.75rem; }
+.intro p { max-width: 38rem; color: var(--muted); margin: 1rem 0 0; font-size: 1.05rem; }
+@media (max-width: 720px) { .project { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="/">fotohmbaku<span>.com</span></a>
+    <nav aria-label="Pages">
+      <a href="/#experience">Experience</a>
+      <a href="/#education">Education</a>
+      <a href="/projects/" aria-current="page">Projects</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="intro">
+    <div class="label">Side projects</div>
+    <h1>Projects</h1>
+    <p>Passion.</p>
+  </section>
+
+  <section class="block" id="hollow">
+    <article class="project">
+      <figure class="cover">
+        <a href="/hollow/"><img src="hollow-cover.jpg" alt="Two swordsmen face off under a red torii gate in HOLLOW" width="1600" height="900"></a>
+        <figcaption>In-engine still: the standoff with Jin, the Sword Sovereign.</figcaption>
+      </figure>
+      <div>
+        <div class="label">Game · Alpha v0.1.0</div>
+        <h3 style="margin-top:0.6rem">HOLLOW — Path of the Sword</h3>
+        <p class="tagline">Ink, steel, and one breath between life and death.</p>
+        <p>A 3D wuxia sword-duelling and roguelite action game styled like a living ink-wash scroll. Master four sword schools, chain mid-air sky-steps, and duel your way from Third Rate to Greatest Under Heaven.</p>
+        <ul class="facts">
+          <li><b>Four sword schools.</b> Heavenly Demon, Wudang Taiji, Vajra Guard and Heavenly Sword Qi, each with its own combat meter.</li>
+          <li><b>Three modes.</b> A six-duel Arena climb, a forging tutorial, and a three-chapter Rogue mode with one life.</li>
+          <li><b>Aerial qinggong.</b> Up to three mid-air sky-steps, wind-gliding and diving plunges.</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Windows · macOS · Linux</span>
+        </div>
+        <div class="links">
+          <a class="btn primary" href="/hollow/">Visit the Hollow landing page</a>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <footer>
+    <span>© <span id="yr">2026</span> Fotoh Mbaku</span>
+    <span>SELECT * FROM projects;</span>
+  </footer>
+</div>
+<script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
+</body>
+</html>
