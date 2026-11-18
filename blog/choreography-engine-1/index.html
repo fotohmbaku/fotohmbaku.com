@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Choreography Engine: Phase 1 | Fotoh Mbaku</title>
+<meta name="description" content="Phase 1 of the choreography engine: one JSON spec builds a move's animation, game clip, skill data and test.">
+<link rel="canonical" href="https://fotohmbaku.com/blog/choreography-engine-1/">
+<meta name="author" content="Fotoh Mbaku">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Choreography Engine: Phase 1">
+<meta property="og:description" content="Phase 1 of the choreography engine: one JSON spec builds a move's animation, game clip, skill data and test.">
+<meta property="og:url" content="https://fotohmbaku.com/blog/choreography-engine-1/">
+<meta property="og:image" content="https://fotohmbaku.com/blog/choreography-engine-1/share.jpg">
+<meta property="og:image:secure_url" content="https://fotohmbaku.com/blog/choreography-engine-1/share.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Chart of hip and blade height across the Falling Leaves move">
+<meta property="og:site_name" content="Fotoh Mbaku">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://fotohmbaku.com/blog/choreography-engine-1/share.jpg">
+<meta name="twitter:image:alt" content="Chart of hip and blade height across the Falling Leaves move">
+<meta property="article:published_time" content="2026-11-17">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/blog/blog.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="/">fotohmbaku<span>.com</span></a>
+    <nav aria-label="Pages">
+      <a href="/#experience">Experience</a>
+      <a href="/#education">Education</a>
+      <a href="/projects/">Projects</a>
+      <a href="/blog/" aria-current="page">Blog</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </header>
+
+  <article>
+    <header class="post-head">
+      <div class="label">Hollow devlog · Nov 17, 2026</div>
+      <h1>Choreography Engine: Phase 1</h1>
+      <p class="dek">A move is written once as a JSON spec. The engine builds the body animation, the game clip, the skill's data and a test from it.</p>
+      <div class="meta">By Fotoh Mbaku · 2 min read</div>
+    </header>
+
+    <div class="prose">
+      <h2>Pipeline</h2>
+      <p>One command: <code>python3 tools/choreo/build.py moves/&lt;move&gt;.json --game</code></p>
+      <ol>
+        <li><b>Dump:</b> exports the clips the spec uses from the game's motion-capture library (Godot).</li>
+        <li><b>Solve:</b> builds the body on the swordsman's rig in Blender. Outputs a baked rig ready for a cinematic, a timeline of events with per-frame hips, chest, head, hands, feet and blade, and the game's in-place clip.</li>
+        <li><b>Game:</b> builds the clip into the game and writes the skill's beats into its data.</li>
+        <li><b>Test:</b> plays the move in the real game and measures it against the spec's targets.</li>
+      </ol>
+
+      <h2>Clip catalogue</h2>
+      <ul>
+        <li>All 452 library clips are read through the game skeleton and measured per frame: hip height, feet, hands, trunk pitch, roll and facing, and foot contact.</li>
+        <li>Per clip: air time, flips, spins, strikes and their direction, kicks, hands on the ground.</li>
+        <li>Each clip gets tags such as <code>flip_back</code>, <code>airborne</code>, <code>crouch_deep</code>, <code>strike_horizontal_rl</code> and <code>kick</code>.</li>
+        <li>A spec can name a clip or query for one by tags, and refer to frames by detected events (<code>takeoff</code>, <code>apex</code>, <code>touchdown</code>, <code>strike</code>) with offsets.</li>
+      </ul>
+
+      <h2>The spec</h2>
+      <ul>
+        <li><b>events:</b> named frames for effects, cameras, sound and the game.</li>
+        <li><b>body:</b> segments of motion capture, each mapped through a timing curve, with blends and legs from another clip.</li>
+        <li><b>layers:</b> pose mixes, bone rotations and breathing, each in an envelope.</li>
+        <li><b>path:</b> hip height keys, travel along the facing, and sway. Feet stay planted outside the airborne span.</li>
+        <li><b>game:</b> the skill, its beats, their timing and fields.</li>
+        <li><b>targets:</b> what the test checks.</li>
+      </ul>
+
+      <h2>First move: Falling Leaves</h2>
+      <p>Falling Leaves is the first move rebuilt from a spec. The game clip it produces is byte-identical to the hand-made one.</p>
+      <figure class="media">
+        <img src="timeline.svg" alt="Chart of hip height and blade tip height across 252 frames of Falling Leaves, with phases and events marked" width="960" height="420" loading="lazy">
+        <figcaption>The solver's timeline output: hip and blade tip height per frame, with the spec's phases and events.</figcaption>
+      </figure>
+      <p>Its test targets: apex at least 4.6 m, at least 2 m back, release above 4 m, one hit, landing 1.2–1.9 s after the hit, ending within 1 m of the start, under 7 s in total.</p>
+      <p>See the result in <a href="/blog/falling-leaves/">Animation Spotlight: Falling Leaves</a>.</p>
+    </div>
+  </article>
+
+  <div class="post-foot">
+    <a href="/blog/">← All posts</a>
+    <a href="/hollow/">Hollow</a>
+    <a href="/projects/">Projects</a>
+  </div>
+
+  <footer>
+    <span>© <span id="yr">2026</span> Fotoh Mbaku</span>
+    <span>SELECT * FROM posts;</span>
+  </footer>
+</div>
+<script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
+</body>
+</html>
