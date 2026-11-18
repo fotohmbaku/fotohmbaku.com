@@ -1,666 +1,169 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>HOLLOW — Path of the Sword | Alpha v0.1.0</title>
-<meta name="description" content="HOLLOW — Path of the Sword is a 3D wuxia sword-duelling and roguelite action game styled like an ink-wash scroll, by Fotoh Mbaku. Alpha v0.1.0 for Windows, macOS and Linux.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HOLLOW — Path of the Sword | Fotoh Mbaku</title>
+<meta name="description" content="HOLLOW — Path of the Sword is a 3D sword-duelling game in development by Fotoh Mbaku, built in Godot 4.">
 <link rel="canonical" href="https://fotohmbaku.com/hollow/">
+<meta name="author" content="Fotoh Mbaku">
 <meta property="og:type" content="website">
 <meta property="og:title" content="HOLLOW — Path of the Sword">
-<meta property="og:description" content="Ink, steel, and one breath between life and death. A 3D wuxia sword-duelling alpha.">
+<meta property="og:description" content="A 3D sword-duelling game in development, built in Godot 4.">
 <meta property="og:url" content="https://fotohmbaku.com/hollow/">
-<meta property="og:image" content="https://fotohmbaku.com/hollow/screenshots/duels/hollow-jin-clash-side-16x9.jpg">
+<meta property="og:image" content="https://fotohmbaku.com/projects/hollow-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/blog/blog.css">
 <style>
-  :root {
-    --ink: #17141a;
-    --ink2: #3a3438;
-    --paper: #efe6d2;
-    --paper2: #e2d6bc;
-    --paper3: #d2c4a6;
-    --seal: #b8321f;
-    --jade: #3f8a62;
-    --indigo: #46539c;
-    --gold: #9a6a12;
-  }
+/* Hollow's palette, from the character sheets: violet coat, crimson sash, gold trim, ink outlines, warm paper. */
+:root {
+  --violet: #4a3d8e;
+  --crimson: #b3283d;
+  --gold: #cfa640;
+  --ink: #2a2132;
+  --paper: #f5f0e8;
+}
+.hero {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: clamp(1.5rem, 5vw, 3.5rem); align-items: center;
+  padding-block: clamp(2rem, 6vw, 4rem); border-bottom: 1px solid var(--line);
+}
+.hero .label { color: var(--crimson); }
+.hero h1 { font-size: clamp(3rem, 10vw, 6rem); font-weight: 800; line-height: 0.9; letter-spacing: -0.04em; color: var(--ink); margin-top: 0.75rem; }
+.hero .sub { margin: 0.5rem 0 0; font: 600 clamp(1.1rem, 2.4vw, 1.4rem)/1.3 var(--font-display); color: var(--violet); }
+.hero p { margin: 1.25rem 0 0; max-width: 32rem; color: var(--muted); font-size: 1.05rem; }
+.hero .rule { width: 4rem; height: 4px; margin-top: 1.5rem; background: linear-gradient(90deg, var(--crimson) 0 50%, var(--gold) 50%); border-radius: 2px; }
+.hero figure { margin: 0; }
+.hero img { display: block; width: 100%; height: auto; border-radius: 14px; background: var(--paper); }
 
-  * { box-sizing: border-box; }
+section.block { padding-block: clamp(2.5rem, 6vw, 3.5rem); border-bottom: 1px solid var(--line); }
+section.block h2 { font-size: clamp(1.6rem, 3.5vw, 2.1rem); font-weight: 600; letter-spacing: -0.02em; color: var(--ink); }
+section.block > p { max-width: 40rem; margin: 0.75rem 0 0; color: var(--muted); }
 
-  html { scroll-behavior: smooth; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+.card { border: 1px solid var(--line); border-top: 3px solid var(--violet); border-radius: 10px; padding: 1rem 1.1rem; }
+.card:nth-child(2) { border-top-color: var(--crimson); }
+.card:nth-child(3) { border-top-color: var(--gold); }
+.card h3 { font-size: 1.1rem; font-weight: 600; }
+.card p { margin: 0.4rem 0 0; color: var(--muted); font-size: 0.95rem; }
 
-  body {
-    margin: 0;
-    background: radial-gradient(ellipse at 50% 15%, var(--paper) 0%, var(--paper2) 60%, var(--paper3) 100%);
-    color: var(--ink);
-    font-family: 'Songti SC', 'STSong', 'Noto Serif SC', Georgia, 'Times New Roman', serif;
-    line-height: 1.65;
-    min-height: 100vh;
-  }
+.grid2 { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 1rem; margin-top: 1.5rem; align-items: start; }
+.media { margin: 0; }
+.media video, .media img { display: block; width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--line); background: var(--paper); }
+.media.full { margin-top: 1.5rem; }
+.media figcaption { margin-top: 0.6rem; color: var(--muted); font: 400 0.75rem/1.5 var(--font-mono); }
 
-  .wrap {
-    max-width: 1040px;
-    margin: 0 auto;
-    padding: 0 24px 80px;
-  }
+.status { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; gap: 0.6rem; }
+.status li { padding-left: 1rem; border-left: 2px solid var(--line); }
+.status li.now { border-left-color: var(--crimson); }
+.status b { font-weight: 600; }
+.links { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem; }
+.btn { display: inline-flex; align-items: center; padding: 0.65rem 1.1rem; border-radius: 999px; font: 500 0.9rem/1 var(--font-body); text-decoration: none; border: 1px solid var(--line); color: var(--fg); }
+.btn.primary { background: var(--violet); border-color: var(--violet); color: #fff; }
+.btn:hover { border-color: var(--crimson); }
 
-  /* Top nav */
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0;
-    border-bottom: 2px solid var(--ink);
-  }
-
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-weight: bold;
-    letter-spacing: 4px;
-    font-size: 18px;
-  }
-
-  .mini-seal {
-    width: 30px;
-    height: 30px;
-    background: var(--seal);
-    color: var(--paper);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 17px;
-    border-radius: 3px 6px 4px 5px;
-    transform: rotate(-4deg);
-    box-shadow: 0 0 0 2px var(--paper), 0 0 0 3px var(--seal);
-  }
-
-  header { flex-wrap: wrap; gap: 12px; }
-  nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    font-size: 14px;
-    letter-spacing: 2px;
-  }
-
-  nav a {
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-  }
-
-  nav a:hover {
-    color: var(--seal);
-    border-bottom-color: var(--seal);
-  }
-
-  /* Hero */
-  .hero {
-    text-align: center;
-    padding: 72px 16px 56px;
-    border-bottom: 3px double var(--ink);
-  }
-
-  .hero .seal {
-    width: 72px;
-    height: 72px;
-    margin: 0 auto 24px;
-    background: var(--seal);
-    color: var(--paper);
-    font-size: 44px;
-    line-height: 72px;
-    border-radius: 5px 10px 6px 9px;
-    transform: rotate(-4deg);
-    box-shadow: 0 0 0 3px var(--paper), 0 0 0 5px var(--seal), 4px 6px 14px #17141a33;
-  }
-
-  .badge {
-    display: inline-block;
-    font-size: 12px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    padding: 4px 12px;
-    border: 1px solid var(--ink);
-    background: #fbf6ea;
-    margin-bottom: 14px;
-  }
-
-  .hero h1 {
-    font-size: clamp(52px, 9vw, 92px);
-    letter-spacing: clamp(10px, 2.5vw, 24px);
-    margin: 0 0 8px 14px;
-    line-height: 1.05;
-    text-shadow: 3px 4px 0 #17141a18;
-  }
-
-  .hero .subtitle {
-    font-size: 20px;
-    letter-spacing: 5px;
-    color: var(--ink2);
-    margin-bottom: 24px;
-  }
-
-  .hero .pitch {
-    max-width: 680px;
-    margin: 0 auto 32px;
-    font-size: 17px;
-    color: var(--ink2);
-  }
-
-  .cta-row {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 14px;
-  }
-
-  .btn {
-    display: inline-block;
-    font-family: inherit;
-    font-size: 15px;
-    letter-spacing: 3px;
-    padding: 12px 24px;
-    border: 2px solid var(--ink);
-    border-radius: 2px 10px 3px 8px;
-    text-decoration: none;
-    cursor: pointer;
-    box-shadow: 3px 3px 0 #17141a26;
-    transition: transform .12s ease, background .15s ease, color .15s ease;
-  }
-
-  .btn:hover { transform: translateY(-2px); }
-
-  .btn.primary {
-    background: var(--ink);
-    color: var(--paper);
-  }
-
-  .btn.primary:hover {
-    background: var(--seal);
-    border-color: var(--seal);
-  }
-
-  .btn.secondary {
-    background: #f6efdfcc;
-    color: var(--ink);
-  }
-
-  .btn.secondary:hover {
-    background: var(--ink);
-    color: var(--paper);
-  }
-
-  .platforms {
-    margin-top: 18px;
-    font-size: 13px;
-    letter-spacing: 2px;
-    color: var(--ink2);
-  }
-
-  /* Section headings */
-  section {
-    padding: 52px 0 12px;
-  }
-
-  h2.sec-title {
-    font-size: 28px;
-    letter-spacing: 6px;
-    margin: 0 0 8px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border-bottom: 2px solid var(--ink);
-    padding-bottom: 8px;
-  }
-
-  h2.sec-title::before {
-    content: '';
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    background: var(--seal);
-    transform: rotate(45deg);
-    box-shadow: 0 0 0 2px var(--paper);
-    flex-shrink: 0;
-  }
-
-  .sec-lead {
-    color: var(--ink2);
-    margin: 0 0 24px;
-    font-size: 15px;
-  }
-
-  /* Sword Schools interactive panel */
-  .school-tabs {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
-    gap: 10px;
-    margin-bottom: 18px;
-  }
-
-  .school-tab {
-    font-family: inherit;
-    text-align: left;
-    padding: 12px 14px;
-    background: #f6efdfcc;
-    border: 2px solid var(--ink);
-    border-left-width: 6px;
-    border-radius: 2px 8px 3px 6px;
-    cursor: pointer;
-    color: var(--ink);
-    box-shadow: 2px 2px 0 #17141a20;
-  }
-
-  .school-tab b {
-    display: block;
-    font-size: 16px;
-    letter-spacing: 2px;
-  }
-
-  .school-tab small {
-    font-size: 12px;
-    color: var(--ink2);
-    letter-spacing: 1px;
-  }
-
-  .school-tab.active {
-    background: var(--ink);
-    color: var(--paper);
-  }
-
-  .school-tab.active small { color: #cfc6b4; }
-
-  .school-detail {
-    background: linear-gradient(180deg, #fbf6ea, var(--paper2));
-    border-top: 5px solid var(--ink);
-    border-bottom: 5px solid var(--ink);
-    padding: 22px 26px;
-    box-shadow: 0 6px 18px #17141a26;
-  }
-
-  .school-detail .meter-row {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 10px;
-    flex-wrap: wrap;
-  }
-
-  .school-detail h3 {
-    margin: 0;
-    font-size: 24px;
-    letter-spacing: 4px;
-  }
-
-  .meter-pill {
-    font-size: 12px;
-    letter-spacing: 2px;
-    padding: 3px 10px;
-    border: 1px solid var(--ink);
-    background: var(--paper);
-  }
-
-  .dry-bar {
-    height: 9px;
-    width: 220px;
-    background: #17141acc;
-    border-radius: 2px 10px 3px 8px / 6px 3px 7px 2px;
-    box-shadow: 0 0 0 1px var(--ink), 0 0 0 3px #efe6d288;
-    overflow: hidden;
-  }
-
-  .dry-bar > div {
-    height: 100%;
-    width: 78%;
-    transition: background .25s ease;
-  }
-
-  /* Modes & Features grid */
-  .grid-3 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
-    gap: 16px;
-  }
-
-  .scroll-card {
-    background: #f6efdfdd;
-    border: 1px solid var(--ink);
-    border-left: 6px solid var(--seal);
-    padding: 18px 20px;
-    box-shadow: 3px 3px 0 #17141a20;
-  }
-
-  .scroll-card.jade { border-left-color: var(--jade); }
-  .scroll-card.indigo { border-left-color: var(--indigo); }
-  .scroll-card.gold { border-left-color: var(--gold); }
-
-  .scroll-card h3 {
-    margin: 0 0 6px;
-    font-size: 20px;
-    letter-spacing: 3px;
-  }
-
-  .scroll-card em {
-    display: block;
-    font-style: normal;
-    font-size: 13px;
-    color: var(--seal);
-    margin-bottom: 8px;
-    letter-spacing: 1px;
-  }
-
-  .scroll-card p {
-    margin: 0;
-    font-size: 14.5px;
-    color: var(--ink2);
-  }
-
-  /* Controls table */
-  .controls-box {
-    background: #fbf6ea;
-    border: 2px solid var(--ink);
-    padding: 20px 24px;
-    font-family: ui-monospace, Menlo, Consolas, monospace;
-    font-size: 13px;
-    line-height: 1.8;
-    box-shadow: 4px 4px 0 #17141a20;
-  }
-
-  .controls-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
-    gap: 8px 24px;
-  }
-
-  kbd {
-    display: inline-block;
-    padding: 1px 6px;
-    border: 1px solid var(--ink);
-    border-radius: 3px;
-    background: var(--paper);
-    font-weight: bold;
-  }
-
-  /* Gallery */
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr));
-    gap: 18px;
-  }
-
-  .shot-card {
-    background: #f6efdfdd;
-    border: 2px solid var(--ink);
-    box-shadow: 4px 4px 0 #17141a24;
-    overflow: hidden;
-  }
-
-  .shot-card img {
-    display: block;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    border-bottom: 2px solid var(--ink);
-  }
-
-  .shot-card figcaption {
-    padding: 10px 14px;
-    font-size: 13.5px;
-    color: var(--ink2);
-  }
-
-  .shot-card figcaption b {
-    color: var(--ink);
-    letter-spacing: 1px;
-  }
-
-  footer {
-    margin-top: 64px;
-    padding-top: 20px;
-    border-top: 2px solid var(--ink);
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-    font-size: 13px;
-    color: var(--ink2);
-  }
-
-  /* Duel scenes: 4K stills from the cinema mode */
-  .duel-feature { margin-bottom: 18px; }
-  .duel-feature img { aspect-ratio: 21 / 9; }
-  .duel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 18px; }
-  .shot-card a { display: block; }
-  .shot-card .hires { float: right; font-size: 11.5px; letter-spacing: 1px; color: var(--seal); text-decoration: none; }
-  .shot-card .hires:hover { text-decoration: underline; }
-  .home-link { display: block; padding-top: 14px; font-size: 13px; letter-spacing: 2px; color: var(--ink2); text-decoration: none; }
-  .home-link:hover { color: var(--seal); }
+@media (max-width: 720px) {
+  .hero, .grid2 { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <a class="home-link" href="/projects/">← fotohmbaku.com / Projects</a> <a class="home-link" href="/blog/hollow-devlog-rebuilding-the-sword/">Latest devlog →</a>
-    <header>
-      <div class="brand"><span class="mini-seal">劍</span> HOLLOW</div>
-      <nav>
-        <a href="#duels">Duel Scenes</a>
-        <a href="#gallery">Action Gallery</a>
-        <a href="#schools">Sword Schools</a>
-        <a href="#modes">Alpha Modes</a>
-        <a href="#combat">Combat &amp; Controls</a>
-      </nav>
-    </header>
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="/">fotohmbaku<span>.com</span></a>
+    <nav aria-label="Pages">
+      <a href="/#experience">Experience</a>
+      <a href="/#education">Education</a>
+      <a href="/projects/" aria-current="page">Projects</a>
+      <a href="/blog/">Blog</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </header>
 
-    <section class="hero">
-      <div class="seal">劍</div>
-      <div class="badge">Playable Desktop Alpha · v0.1.0</div>
+  <section class="hero">
+    <div>
+      <div class="label">Game · In development</div>
       <h1>HOLLOW</h1>
-      <div class="subtitle">The path of the sword</div>
-      <p class="pitch">
-        A 3D wuxia sword-duelling &amp; roguelite action game styled like a living ink-wash scroll.
-        Master four rival sword schools, chain mid-air sky-steps, open your meridians, and duel your way to <strong>Greatest Under Heaven</strong>.
-      </p>
-      <div class="cta-row">
-        <a class="btn primary" href="#modes">Explore Alpha v0.1.0</a>
-        <a class="btn secondary" href="#schools">View Sword Schools</a>
+      <p class="sub">Path of the Sword</p>
+      <p>A 3D sword-duelling game built around stamina, stances and reading your opponent. Toon-shaded, built in Godot 4.</p>
+      <div class="rule" aria-hidden="true"></div>
+      <div class="links">
+        <a class="btn primary" href="/blog/hollow-devlog-rebuilding-the-sword/">Latest devlog</a>
+        <a class="btn" href="#status">Status</a>
       </div>
-      <div class="platforms">Windows · macOS · Linux / Steam Deck &nbsp;|&nbsp; Keyboard + Mouse &amp; Full Controller</div>
-    </section>
+    </div>
+    <figure>
+      <img src="media/swordsman-face.jpg" alt="The Hollow Swordsman: a toon-shaded close-up of his face and turban beside a full-body view" width="1204" height="700">
+    </figure>
+  </section>
 
-    <section id="duels">
-      <h2 class="sec-title">Duel Scenes</h2>
-      <p class="sec-lead">Choreographed 1v1 moments against Jin, the Sword Sovereign, staged with the game's own combat and rendered in-engine at 3840×2160. Click any still to view it full size.</p>
-        <figure class="shot-card duel-feature" style="margin:0">
-          <a href="screenshots/duels/hollow-jin-clash-side-16x9.jpg"><img src="screenshots/duels/hollow-jin-clash-side-16x9.jpg" alt="Blade Clash: Steel meets steel and the duel resets to whoever reads the next beat." loading="lazy" /></a>
-          <figcaption><b>Blade Clash:</b> Steel meets steel and the duel resets to whoever reads the next beat.</figcaption>
-        </figure>
-      <div class="duel-grid">
-        <figure class="shot-card" style="margin:0">
-          <a href="screenshots/duels/hollow-jin-parry-side-16x9.jpg"><img src="screenshots/duels/hollow-jin-parry-side-16x9.jpg" alt="Perfect Parry: A plain slash meets a parry at the last instant, under the torii gate." loading="lazy" /></a>
-          <figcaption><b>Perfect Parry:</b> A plain slash meets a parry at the last instant, under the torii gate.</figcaption>
-        </figure>
-        <figure class="shot-card" style="margin:0">
-          <a href="screenshots/duels/hollow-jin-stepin-side-16x9.jpg"><img src="screenshots/duels/hollow-jin-stepin-side-16x9.jpg" alt="Step Into the Thrust: A blue-glinting thrust answered the hard way: rolling straight into it." loading="lazy" /></a>
-          <figcaption><b>Step Into the Thrust:</b> A blue-glinting thrust answered the hard way: rolling straight into it.</figcaption>
-        </figure>
-        <figure class="shot-card" style="margin:0">
-          <a href="screenshots/duels/hollow-jin-skyward-side-16x9.jpg"><img src="screenshots/duels/hollow-jin-skyward-side-16x9.jpg" alt="Skyward Pursuit: Launched, chased and cut down in the open sky." loading="lazy" /></a>
-          <figcaption><b>Skyward Pursuit:</b> Launched, chased and cut down in the open sky.</figcaption>
-        </figure>
-        <figure class="shot-card" style="margin:0">
-          <a href="screenshots/duels/hollow-jin-qiwave-side-16x9.jpg"><img src="screenshots/duels/hollow-jin-qiwave-side-16x9.jpg" alt="Unleashed Qi: Blade aura unleashed: every swing throws a crescent of violet qi across the ring." loading="lazy" /></a>
-          <figcaption><b>Unleashed Qi:</b> Blade aura unleashed: every swing throws a crescent of violet qi across the ring.</figcaption>
-        </figure>
-        <figure class="shot-card" style="margin:0">
-          <a href="screenshots/duels/hollow-jin-splat-impact-16x9.jpg"><img src="screenshots/duels/hollow-jin-splat-impact-16x9.jpg" alt="Into the Lantern: A charged heavy drives Jin through a stone lantern, spilling burning oil." loading="lazy" /></a>
-          <figcaption><b>Into the Lantern:</b> A charged heavy drives Jin through a stone lantern, spilling burning oil.</figcaption>
-        </figure>
-        <figure class="shot-card" style="margin:0">
-          <a href="screenshots/duels/hollow-jin-execution-strike-16x9.jpg"><img src="screenshots/duels/hollow-jin-execution-strike-16x9.jpg" alt="The Execution: His stance broken, the Sovereign kneels for the finishing blade." loading="lazy" /></a>
-          <figcaption><b>The Execution:</b> His stance broken, the Sovereign kneels for the finishing blade.</figcaption>
-        </figure>
-        <figure class="shot-card" style="margin:0">
-          <a href="screenshots/duels/hollow-jin-standoff-foe-16x9.jpg"><img src="screenshots/duels/hollow-jin-standoff-foe-16x9.jpg" alt="Jin, Sword Sovereign: The final master: every lesson of the arena in one sword." loading="lazy" /></a>
-          <figcaption><b>Jin, Sword Sovereign:</b> The final master: every lesson of the arena in one sword.</figcaption>
-        </figure>
-        <figure class="shot-card" style="margin:0">
-          <a href="screenshots/duels/hollow-jin-standoff-low-16x9.jpg"><img src="screenshots/duels/hollow-jin-standoff-low-16x9.jpg" alt="The Standoff: Two swordsmen, one ring, one breath before the first cut." loading="lazy" /></a>
-          <figcaption><b>The Standoff:</b> Two swordsmen, one ring, one breath before the first cut.</figcaption>
-        </figure>
-      </div>
-    </section>
+  <section class="block" id="combat">
+    <h2>Combat</h2>
+    <p>One-on-one duels against AI swordsmen. Every exchange is about stamina.</p>
+    <div class="cards">
+      <div class="card"><h3>Stances</h3><p>Heaven hits hard but guards poorly. Man is balanced. Earth is fast with the best dodge.</p></div>
+      <div class="card"><h3>Stamina</h3><p>Tap guard right after a string to recover most of the stamina it cost. Run dry and you stagger.</p></div>
+      <div class="card"><h3>Countering</h3><p>Readable wind-ups, one counter per stance, and a punish window after each enemy string.</p></div>
+      <div class="card"><h3>Opponents</h3><p>Duelists switch stances, keep their distance, feint and punish missed attacks.</p></div>
+    </div>
+  </section>
 
-    <section id="gallery">
-      <h2 class="sec-title">Alpha Gameplay Captures</h2>
-      <p class="sec-lead">Unretouched 1600×900 screenshots captured directly from Alpha v0.1.0—featuring Demonic Charge, Arena clashes, sword-arc combos, and Mountain Splitter.</p>
-      <div class="gallery-grid">
-        <figure class="shot-card" style="margin:0">
-          <img src="screenshots/real-01-demonic-charge.jpg" loading="lazy" alt="Demonic Charge in Arena Mode" />
-          <figcaption><b>Demonic Charge:</b> Violet afterimages and lotus sigils erupt mid-duel against Gao the Iron Ox.</figcaption>
-        </figure>
-        <figure class="shot-card" style="margin:0">
-          <img src="screenshots/real-02-arena-clash.jpg" loading="lazy" alt="Arena Mode clash with Gao the Iron Ox" />
-          <figcaption><b>Arena Clash:</b> High-speed sword exchange with glowing Qi particles on the Taiji arena floor.</figcaption>
-        </figure>
-        <figure class="shot-card" style="margin:0">
-          <img src="screenshots/real-03-aerial-skystep.jpg" loading="lazy" alt="Ox Horn Sweep and blade arc" />
-          <figcaption><b>Ox Horn Sweep:</b> Clean sweeping blade trails and close-quarters stance pressure.</figcaption>
-        </figure>
-        <figure class="shot-card" style="margin:0">
-          <img src="screenshots/real-04-rogue-combat.jpg" loading="lazy" alt="Mountain Splitter ground eruption" />
-          <figcaption><b>Mountain Splitter:</b> Earth-shattering stone spikes and ink-black shockwave sigils.</figcaption>
-        </figure>
-      </div>
-    </section>
+  <section class="block" id="characters">
+    <h2>Characters</h2>
+    <p>Low-poly and toon-shaded, with ink outlines and lilac shadows. Each is modelled in Blender from a concept sheet and rigged to the game's skeleton.</p>
+    <div class="grid2">
+      <figure class="media">
+        <video src="/blog/hollow-devlog-rebuilding-the-sword/swordsman-anim-test.mp4" poster="/blog/hollow-devlog-rebuilding-the-sword/swordsman-anim-test.jpg" width="960" height="720" controls muted playsinline preload="metadata"></video>
+        <figcaption>The Hollow Swordsman, animation test.</figcaption>
+      </figure>
+      <figure class="media">
+        <video src="/blog/hollow-devlog-rebuilding-the-sword/swordsman-turntable.mp4" poster="/blog/hollow-devlog-rebuilding-the-sword/swordsman-turntable.jpg" width="480" height="720" autoplay muted loop playsinline preload="metadata"></video>
+        <figcaption>Turntable.</figcaption>
+      </figure>
+    </div>
+    <figure class="media full">
+      <img src="/blog/hollow-devlog-rebuilding-the-sword/swordsman-sheet.jpg" alt="Concept sheet of the Hollow Swordsman next to the model from front, side and back" width="1400" height="518" loading="lazy">
+      <figcaption>Concept sheet and model.</figcaption>
+    </figure>
+  </section>
 
-    <section id="schools">
-      <h2 class="sec-title">Four Sword Schools</h2>
-      <p class="sec-lead">Each school grants a unique combat meter and rewrites how you attack, defend, and spend Qi.</p>
+  <section class="block" id="swords">
+    <h2>Swords</h2>
+    <p>Blades and scabbards in the same style, with an aura that lights the blade.</p>
+    <div class="grid2">
+      <figure class="media">
+        <img src="media/swords.jpg" alt="Four swords with their scabbards and edge views" width="1400" height="1018" loading="lazy">
+        <figcaption>Swords and scabbards.</figcaption>
+      </figure>
+      <figure class="media">
+        <video src="/blog/hollow-devlog-rebuilding-the-sword/aura-swords.mp4" poster="/blog/hollow-devlog-rebuilding-the-sword/aura-swords.jpg" width="960" height="720" autoplay muted loop playsinline preload="metadata"></video>
+        <figcaption>Aura.</figcaption>
+      </figure>
+    </div>
+  </section>
 
-      <div class="school-tabs" id="schoolTabs">
-        <button class="school-tab active" data-id="demon" style="border-left-color:#c0303a">
-          <b>Heavenly Demon</b>
-          <small>Meter: Demonic Intent</small>
-        </button>
-        <button class="school-tab" data-id="wudang" style="border-left-color:#7fc8ff">
-          <b>Wudang Taiji</b>
-          <small>Meter: Taiji Flow</small>
-        </button>
-        <button class="school-tab" data-id="vajra" style="border-left-color:#e0b040">
-          <b>Vajra Guard</b>
-          <small>Meter: Bastion</small>
-        </button>
-        <button class="school-tab" data-id="aura" style="border-left-color:#b48cff">
-          <b>Heavenly Sword Qi</b>
-          <small>Meter: Resonance</small>
-        </button>
-      </div>
+  <section class="block" id="status">
+    <h2>Status</h2>
+    <ul class="status">
+      <li class="now"><b>In development.</b> Not released yet.</li>
+      <li><b>Engine:</b> Godot 4, for Windows, macOS and Linux.</li>
+      <li><b>Now:</b> tuning combat, and bringing the new characters and swords into the game.</li>
+      <li><b>Later:</b> sword schools, built on top of the new combat.</li>
+    </ul>
+    <div class="links">
+      <a class="btn" href="/blog/">Devlogs</a>
+      <a class="btn" href="/projects/">All projects</a>
+    </div>
+  </section>
 
-      <div class="school-detail" id="schoolDetail">
-        <div class="meter-row">
-          <h3 id="sdName">Heavenly Demon</h3>
-          <span class="meter-pill" id="sdMeter">Demonic Intent</span>
-          <div class="dry-bar"><div id="sdBar" style="background:linear-gradient(90deg,#4a0810,#c0303a)"></div></div>
-        </div>
-        <p id="sdDesc">
-          Overwhelming force. Blows build Demonic Intent; skills cast at half Intent or more erupt in their demonic form. Heavy blows never flinch.
-        </p>
-      </div>
-    </section>
-
-    <section id="modes">
-      <h2 class="sec-title">What’s in Alpha v0.1.0</h2>
-      <p class="sec-lead">Three playable modes designed to test duelling precision, character building, and roguelite progression.</p>
-
-      <div class="grid-3">
-        <div class="scroll-card">
-          <h3>Arena Mode</h3>
-          <em>Six duels to become the greatest under heaven</em>
-          <p>
-            Ascend the six martial realms—from <strong>Third Rate</strong> through <strong>Peak</strong> and <strong>Transcendent</strong> to <strong>Greatest Under Heaven</strong>—in pure, escalating 1v1 sword duels.
-          </p>
-        </div>
-        <div class="scroll-card jade">
-          <h3>Tutorial &amp; Forging</h3>
-          <em>Forge a swordsman, then survive a gauntlet of six trials</em>
-          <p>
-            Choose an archetype (Wandering Swordsman, Demonic Sect Elder, Mountain Sect Disciple), customize your <strong>Jian</strong> or <strong>Dao</strong>, robes, hats, and Qi color, and master the arts.
-          </p>
-        </div>
-        <div class="scroll-card indigo">
-          <h3>Rogue Mode</h3>
-          <em>Three chapters, three sword schools, one life</em>
-          <p>
-            Fight through shrines, elites, and chapter bosses while drafting skills and boons. Earn persistent <strong>Insight</strong> to carry your mastery into future runs.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section id="combat">
-      <h2 class="sec-title">Lightness Arts &amp; Controls</h2>
-      <p class="sec-lead">Wuxia combat in three dimensions—fight on the ground, across the air, and along your meridian tree.</p>
-
-      <div class="controls-box">
-        <div class="controls-grid">
-          <div><kbd>WASD</kbd> Move &nbsp;·&nbsp; <kbd>Q</kbd> Lock-on &nbsp;·&nbsp; <kbd>X</kbd> Crouch</div>
-          <div><kbd>Space</kbd> Tap: Flash Dodge (ground/air) / Hold: Sprint &amp; Wind-Glide</div>
-          <div><kbd>F</kbd> Leap &amp; up to 3x mid-air Sky-Steps</div>
-          <div><kbd>Shift</kbd>+<kbd>LMB</kbd> Mid-air Dive Plunge onto locked foe</div>
-          <div><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> Sword Arts &nbsp;·&nbsp; <kbd>V</kbd> Blade Aura</div>
-          <div><kbd>M</kbd> Cultivation &amp; Meridian Acupoints &nbsp;·&nbsp; <kbd>F11</kbd> Fullscreen</div>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <span><strong>HOLLOW — Path of the Sword</strong> · Alpha v0.1.0</span>
-      <span>Built with Three.js &amp; Electron · Windows / macOS / Linux</span>
-    </footer>
-  </div>
-
-  <script>
-    const SCHOOLS = {
-      demon: {
-        name: "Heavenly Demon",
-        meter: "Demonic Intent",
-        grad: "linear-gradient(90deg,#4a0810,#c0303a)",
-        desc: "Overwhelming force. Blows build Demonic Intent; skills cast at half Intent or more erupt in their demonic form. Heavy blows never flinch."
-      },
-      wudang: {
-        name: "Wudang Taiji",
-        meter: "Taiji Flow",
-        grad: "linear-gradient(90deg,#2a4a6a,#bfe4ff)",
-        desc: "Softness overcomes hardness. Parries, blocks and perfect dodges build Taiji Flow, which powers counters that turn blows back on their owners."
-      },
-      vajra: {
-        name: "Vajra Guard",
-        meter: "Bastion",
-        grad: "linear-gradient(90deg,#5a4010,#e0b040)",
-        desc: "Immovable defence. Guarding costs less, a guard raised at the last instant is a Just Guard that drains ki, and every block, parry and deflect builds Bastion for crushing counters. Qi Deflect is cheaper."
-      },
-      aura: {
-        name: "Heavenly Sword Qi",
-        meter: "Resonance",
-        grad: "linear-gradient(90deg,#3a2a6a,#c8a8ff)",
-        desc: "The blade made light. Blade aura burns half the qi and unleashed slashes cost less; with the aura lit, string finishers throw sword light. Every skill flows from the lit blade, and Resonance builds while it burns."
-      }
-    };
-
-    const tabs = document.querySelectorAll(".school-tab");
-    tabs.forEach(tab => {
-      tab.addEventListener("click", () => {
-        tabs.forEach(t => t.classList.remove("active"));
-        tab.classList.add("active");
-        const s = SCHOOLS[tab.dataset.id];
-        document.getElementById("sdName").textContent = s.name;
-        document.getElementById("sdMeter").textContent = s.meter;
-        document.getElementById("sdBar").style.background = s.grad;
-        document.getElementById("sdDesc").textContent = s.desc;
-      });
-    });
-  </script>
+  <footer>
+    <span>© <span id="yr">2026</span> Fotoh Mbaku</span>
+    <span>SELECT * FROM games;</span>
+  </footer>
+</div>
+<script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
 </body>
 </html>
