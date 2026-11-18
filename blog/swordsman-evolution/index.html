@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Character Evolution: The Hollow Swordsman | Fotoh Mbaku</title>
+<meta name="description" content="The Hollow Swordsman's model from concept sheet to first render to today's rebuild.">
+<link rel="canonical" href="https://fotohmbaku.com/blog/swordsman-evolution/">
+<meta name="author" content="Fotoh Mbaku">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Character Evolution: The Hollow Swordsman">
+<meta property="og:description" content="The Hollow Swordsman's model from concept sheet to first render to today's rebuild.">
+<meta property="og:url" content="https://fotohmbaku.com/blog/swordsman-evolution/">
+<meta property="og:image" content="https://fotohmbaku.com/blog/swordsman-evolution/share.jpg">
+<meta property="og:image:secure_url" content="https://fotohmbaku.com/blog/swordsman-evolution/share.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Hollow Swordsman as concept art, first model and new model, side by side">
+<meta property="og:site_name" content="Fotoh Mbaku">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://fotohmbaku.com/blog/swordsman-evolution/share.jpg">
+<meta name="twitter:image:alt" content="The Hollow Swordsman as concept art, first model and new model, side by side">
+<meta property="article:published_time" content="2026-11-18">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/blog/blog.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="/">fotohmbaku<span>.com</span></a>
+    <nav aria-label="Pages">
+      <a href="/#experience">Experience</a>
+      <a href="/#education">Education</a>
+      <a href="/projects/">Projects</a>
+      <a href="/blog/" aria-current="page">Blog</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </header>
+
+  <article>
+    <header class="post-head">
+      <div class="label">Hollow devlog · Nov 18, 2026</div>
+      <h1>Character Evolution: The Hollow Swordsman</h1>
+      <p class="dek">The same character in three stages: the concept sheet, the first model (Nov 17) and the new model (Nov 18).</p>
+      <div class="meta">By Fotoh Mbaku · 2 min read</div>
+    </header>
+
+    <div class="prose">
+      <h2>1. Concept</h2>
+      <ul>
+        <li>A turnaround from the front, side and back on one sheet.</li>
+        <li>Indigo high-collared coat with gold frogging, crimson sash, a pale scarf flowing into a torn cape, a patterned head-wrap with a crescent jewel, and silver hair.</li>
+        <li>Every later stage takes its palette and costume from this sheet.</li>
+      </ul>
+      <figure class="media">
+        <img src="concept.jpg" alt="Concept turnaround of the Hollow Swordsman from the front, side and back" width="1024" height="1024" loading="lazy">
+        <figcaption>Concept turnaround.</figcaption>
+      </figure>
+
+      <h2>2. First model (Nov 17)</h2>
+      <ul>
+        <li>Built entirely by a Python script in Blender. Every garment is simple low-poly geometry.</li>
+        <li>Toon shading with lilac shadows and ink outlines, on the game's faceless mannequin.</li>
+        <li>Skinned to the game's skeleton, so the game's animations played on it unchanged.</li>
+      </ul>
+      <figure class="media">
+        <img src="v1-views.jpg" alt="The first Blender model of the Hollow Swordsman from the front, side and back" width="1400" height="824" loading="lazy">
+        <figcaption>First model: front, side and back.</figcaption>
+      </figure>
+      <figure class="media">
+        <video src="/blog/hollow-devlog-rebuilding-the-sword/swordsman-anim-test.mp4" poster="/blog/hollow-devlog-rebuilding-the-sword/swordsman-anim-test.jpg" width="960" height="720" controls muted playsinline preload="none"></video>
+        <figcaption>First model with the game's animations.</figcaption>
+      </figure>
+
+      <h2>3. New model (Nov 18)</h2>
+      <ul>
+        <li>A shared character standard and toolkit, so every character is built the same way from a short spec: palette, proportions, garments, outlines and which parts hang on spring chains.</li>
+        <li>A sculpted base body (Quaternius Universal Base Characters) with a real face, hands and eyes, fitted onto the game's skeleton.</li>
+        <li>The model itself is generated from the concept with an image-to-3D tool, then fitted onto the game skeleton automatically. The mesh was reduced from 1.15 million to 60,000 triangles.</li>
+        <li>Skin weights are taken from the base body. Loose cloth and hair hang from the trunk, never an arm.</li>
+        <li>19 spring chains (7 hair, 7 cape, 5 coat skirt), for 117 bones in total. The 65 game bones are unchanged, so every game clip and film move still fits exactly.</li>
+      </ul>
+      <figure class="media">
+        <img src="v2-views.jpg" alt="The new model of the Hollow Swordsman from the front, side and back" width="1400" height="712" loading="lazy">
+        <figcaption>New model: front, side and back.</figcaption>
+      </figure>
+      <figure class="media">
+        <img src="v2-face.jpg" alt="Close-ups of the new model's face, bust and full body" width="1400" height="514" loading="lazy">
+        <figcaption>Face, bust and full body.</figcaption>
+      </figure>
+      <figure class="media narrow">
+        <video src="v2-turntable.mp4" poster="v2-turntable.jpg" width="480" height="720" autoplay muted loop playsinline preload="metadata"></video>
+        <figcaption>New model turntable.</figcaption>
+      </figure>
+      <figure class="media">
+        <video src="reel.mp4" poster="reel.jpg" width="960" height="720" controls muted playsinline preload="none"></video>
+        <figcaption>The toolkit build on the sculpted base body, before the generated mesh, playing the game's animations.</figcaption>
+      </figure>
+    </div>
+  </article>
+
+  <div class="post-foot">
+    <a href="/blog/">← All posts</a>
+    <a href="/hollow/">Hollow</a>
+    <a href="/projects/">Projects</a>
+  </div>
+
+  <footer>
+    <span>© <span id="yr">2026</span> Fotoh Mbaku</span>
+    <span>SELECT * FROM posts;</span>
+  </footer>
+</div>
+<script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
+</body>
+</html>
