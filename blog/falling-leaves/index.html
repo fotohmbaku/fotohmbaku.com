@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Animation Spotlight: Falling Leaves | Fotoh Mbaku</title>
+<meta name="description" content="The Falling Leaves cinematic and in-game skill: how they were built from one Blender animation.">
+<link rel="canonical" href="https://fotohmbaku.com/blog/falling-leaves/">
+<meta name="author" content="Fotoh Mbaku">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Animation Spotlight: Falling Leaves">
+<meta property="og:description" content="The Falling Leaves cinematic and in-game skill: how they were built from one Blender animation.">
+<meta property="og:url" content="https://fotohmbaku.com/blog/falling-leaves/">
+<meta property="og:image" content="https://fotohmbaku.com/blog/falling-leaves/share.jpg">
+<meta property="og:image:secure_url" content="https://fotohmbaku.com/blog/falling-leaves/share.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Hollow Swordsman under the Falling Leaves title card">
+<meta property="og:site_name" content="Fotoh Mbaku">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://fotohmbaku.com/blog/falling-leaves/share.jpg">
+<meta name="twitter:image:alt" content="The Hollow Swordsman under the Falling Leaves title card">
+<meta property="article:published_time" content="2026-11-17">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/blog/blog.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="/">fotohmbaku<span>.com</span></a>
+    <nav aria-label="Pages">
+      <a href="/#experience">Experience</a>
+      <a href="/#education">Education</a>
+      <a href="/projects/">Projects</a>
+      <a href="/blog/" aria-current="page">Blog</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </header>
+
+  <article>
+    <header class="post-head">
+      <div class="label">Hollow devlog · Nov 17, 2026</div>
+      <h1>Animation Spotlight: Falling Leaves</h1>
+      <p class="dek">An advanced ki blade art, made as a cinematic and as a game skill from one Blender animation, using the <a href="/blog/wandering-crescent/">Wandering Crescent</a> pipeline.</p>
+      <div class="meta">By Fotoh Mbaku · 2 min read</div>
+    </header>
+
+    <div class="prose">
+      <figure class="media">
+        <video src="falling-leaves.mp4" poster="falling-leaves.jpg" width="1280" height="720" controls playsinline preload="metadata"></video>
+        <figcaption>Cinematic: 1080p30, 19.1 s, rendered in Blender.</figcaption>
+      </figure>
+
+      <h2>Animation</h2>
+      <ul>
+        <li>Built from the game's motion-capture clips: an axe standing jump for the gather, a backflip for the leap, an axe horizontal attack for the coil and sweep, and a ninja landing for the fall and guard.</li>
+        <li>Cape, sash, skirt and hair baked as verlet ropes in this sequence's wind.</li>
+      </ul>
+
+      <h2>Sequence</h2>
+      <ul>
+        <li><b>Frames 0–31:</b> crouch while ki rises from the ground.</li>
+        <li><b>31–56:</b> backflip to about 7.5 m, leaving a crater.</li>
+        <li><b>56–84:</b> hold at the apex, blade drawn back. The blade turns black.</li>
+        <li><b>84–101:</b> forward plunge. A horizontal sweep releases one large crescent wave.</li>
+        <li><b>101–110:</b> six smaller waves split off and hit the ground, each leaving a crater.</li>
+        <li><b>110–252:</b> slow drift down, landing in a ready guard.</li>
+      </ul>
+
+      <h2>Rendering</h2>
+      <ul>
+        <li>Same ruined courtyard as Wandering Crescent, turned to autumn, with a new black material for the blade.</li>
+        <li>Ten shots, with every effect rebuilt per frame by script.</li>
+        <li>The soundtrack is synthesised by a Python script.</li>
+      </ul>
+
+      <h2>In game</h2>
+      <ul>
+        <li>The skill <b>fallingLeaves</b> is the Test Book's third skill, with five beats.</li>
+        <li>The Blender animation is exported as an in-place clip in the game skeleton's bone space, with every key exact.</li>
+        <li>The waves reuse the Aura Wave model. A new Blender script builds a small ki leaf for the leftover particles.</li>
+        <li>New beat fields cover falling, drift, a capped fall speed for the float, the black blade, the crater and wave release, and a camera that pulls back to keep the full height in frame.</li>
+        <li>Covered by an automated test in the Godot suite.</li>
+      </ul>
+      <figure class="media">
+        <video src="ingame.mp4" poster="ingame.jpg" width="1280" height="720" autoplay muted loop playsinline preload="metadata"></video>
+        <figcaption>fallingLeaves in Training.</figcaption>
+      </figure>
+    </div>
+  </article>
+
+  <div class="post-foot">
+    <a href="/blog/">← All posts</a>
+    <a href="/hollow/">Hollow</a>
+    <a href="/projects/">Projects</a>
+  </div>
+
+  <footer>
+    <span>© <span id="yr">2026</span> Fotoh Mbaku</span>
+    <span>SELECT * FROM posts;</span>
+  </footer>
+</div>
+<script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
+</body>
+</html>
