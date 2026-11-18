@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Skill Creation 1 | Fotoh Mbaku</title>
+<meta name="description" content="The first ki arts in HOLLOW: Aura Wave, Aura Sphere and a fire blade aura.">
+<link rel="canonical" href="https://fotohmbaku.com/blog/skill-creation-1/">
+<meta name="author" content="Fotoh Mbaku">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Skill Creation 1">
+<meta property="og:description" content="The first ki arts in HOLLOW: Aura Wave, Aura Sphere and a fire blade aura.">
+<meta property="og:url" content="https://fotohmbaku.com/blog/skill-creation-1/">
+<meta property="og:image" content="https://fotohmbaku.com/blog/skill-creation-1/share.jpg">
+<meta property="og:image:secure_url" content="https://fotohmbaku.com/blog/skill-creation-1/share.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Aura Wave and Aura Sphere projectile models">
+<meta property="og:site_name" content="Fotoh Mbaku">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://fotohmbaku.com/blog/skill-creation-1/share.jpg">
+<meta name="twitter:image:alt" content="The Aura Wave and Aura Sphere projectile models">
+<meta property="article:published_time" content="2026-11-17">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/blog/blog.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="/">fotohmbaku<span>.com</span></a>
+    <nav aria-label="Pages">
+      <a href="/#experience">Experience</a>
+      <a href="/#education">Education</a>
+      <a href="/projects/">Projects</a>
+      <a href="/blog/" aria-current="page">Blog</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </header>
+
+  <article>
+    <header class="post-head">
+      <div class="label">Hollow devlog · Nov 17, 2026</div>
+      <h1>Skill Creation 1</h1>
+      <p class="dek">The first ki arts in <a href="/hollow/">HOLLOW</a>: two aura skills and a new look for the lit blade.</p>
+      <div class="meta">By Fotoh Mbaku · 2 min read</div>
+    </header>
+
+    <div class="prose">
+      <h2>The Test Book</h2>
+      <p>A test manual for building ki arts. It has two skills, each made of a gather beat and a release beat with its own animation. Neither needs the blade aura lit.</p>
+
+      <h2>Aura Wave</h2>
+      <p>Coil, then a turning sweep throws a wave of sword light. 12 qi, 1 s cooldown. It hits for 34 and breaks guard.</p>
+      <p>Each stance throws it differently, and the wave takes its angle and position from the cut that draws it:</p>
+      <ul>
+        <li><b>Heaven:</b> blade raised in both hands, then a two-handed chop that throws an upright wave.</li>
+        <li><b>Man:</b> a turn, then a sweep that throws a flat wave.</li>
+        <li><b>Earth:</b> sink low with the blade drawn back, then a rising backhand that throws a slanted wave.</li>
+      </ul>
+
+      <h2>Aura Sphere</h2>
+      <p>Sweep the sword back low, cup a sphere at the chest with the off hand, then drive it out with a palm strike. It's a slow, pulsing orb that bursts on the first foe it reaches. 18 qi, 48 damage. It breaks guard and knocks back.</p>
+
+      <h2>Projectile models</h2>
+      <p>Both projectiles are modelled in Blender by a script. The wave is a crescent of brush strokes. Each stroke's vertex colour marks its role (aura colour, accent, light, ink), so the game's shader paints it in the player's own aura colours. The sphere is a faceted orb with two rings. The script also builds a beam: a spear of light wrapped in a spiral ribbon.</p>
+
+      <figure class="media">
+        <img src="aura-projectiles.jpg" alt="The Aura Wave, a crescent of brush strokes, and the Aura Sphere, an orb inside two rings" width="1600" height="720" loading="lazy">
+        <figcaption>The wave and sphere models, rendered on their own without the game's shader.</figcaption>
+      </figure>
+
+      <h2>Fire blade aura</h2>
+      <p>The lit blade aura now burns. A band of flame wraps the blade and always faces the camera, with its tongues streaming back against the swing. Embers drift off it, a hot rim lines the steel, and a light flickers on whatever is near. Cuts leave a streak in the fire's colour.</p>
+
+      <figure class="media">
+        <video src="/blog/hollow-devlog-rebuilding-the-sword/aura-swords.mp4" poster="/blog/hollow-devlog-rebuilding-the-sword/aura-swords.jpg" width="960" height="720" autoplay muted loop playsinline preload="metadata"></video>
+        <figcaption>Aura concepts for the swords, looping.</figcaption>
+      </figure>
+
+      <h2>Next</h2>
+      <p>More skills on the same gather-and-release pattern, then the sword schools.</p>
+    </div>
+  </article>
+
+  <div class="post-foot">
+    <a href="/blog/">← All posts</a>
+    <a href="/hollow/">Hollow</a>
+    <a href="/projects/">Projects</a>
+  </div>
+
+  <footer>
+    <span>© <span id="yr">2026</span> Fotoh Mbaku</span>
+    <span>SELECT * FROM posts;</span>
+  </footer>
+</div>
+<script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
+</body>
+</html>
