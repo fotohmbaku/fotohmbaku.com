@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hollow: November update | Fotoh Mbaku</title>
+<meta name="description" content="HOLLOW — Path of the Sword in November: the Godot rewrite, rebuilt combat, and the first modelled character.">
+<link rel="canonical" href="https://fotohmbaku.com/blog/hollow-devlog-rebuilding-the-sword/">
+<meta name="author" content="Fotoh Mbaku">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hollow: November update">
+<meta property="og:description" content="The Godot rewrite, rebuilt combat, and the first modelled character.">
+<meta property="og:url" content="https://fotohmbaku.com/blog/hollow-devlog-rebuilding-the-sword/">
+<meta property="og:image" content="https://fotohmbaku.com/blog/hollow-devlog-rebuilding-the-sword/swordsman-sheet.jpg">
+<meta property="article:published_time" content="2026-11-17">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/blog/blog.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="/">fotohmbaku<span>.com</span></a>
+    <nav aria-label="Pages">
+      <a href="/#experience">Experience</a>
+      <a href="/#education">Education</a>
+      <a href="/projects/">Projects</a>
+      <a href="/blog/" aria-current="page">Blog</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </header>
+
+  <article>
+    <header class="post-head">
+      <div class="label">Hollow devlog · Nov 17, 2026</div>
+      <h1>Hollow: November update</h1>
+      <p class="dek">What changed in <a href="/hollow/">HOLLOW — Path of the Sword</a> this month.</p>
+      <div class="meta">By Fotoh Mbaku · 2 min read</div>
+    </header>
+
+    <div class="prose">
+      <h2>Moving to Godot 4</h2>
+      <p>The game is being rewritten in Godot 4. The Three.js browser prototype stays as the place to design and tune. Both read the same rules file, and about 44,000 parity checks confirm the Godot port matches the prototype.</p>
+
+      <h2>Combat rebuilt</h2>
+      <p>I removed the six sword schools and their 225 skills to rebuild basic combat first. They will come back later. Built so far:</p>
+      <ul>
+        <li><b>Stamina:</b> tap guard right after a string to recover most of the stamina it cost.</li>
+        <li><b>Stances:</b> Heaven, Man and Earth, each with clear strengths and weaknesses.</li>
+        <li><b>Countering:</b> readable wind-ups and a punish window after each enemy string.</li>
+        <li><b>AI duelists:</b> switch stances, space, feint and punish missed attacks.</li>
+        <li><b>Hitboxes:</b> hits land where the blade actually passes.</li>
+      </ul>
+      <p>Attacks now use motion-captured animation. Hand-keyed clips cover the rest.</p>
+
+      <h2>Characters and swords</h2>
+      <p>The Hollow Swordsman is the first character modelled for the game: low-poly and toon-shaded, built in Blender from a concept sheet and rigged to the game's skeleton. He isn't in the game yet.</p>
+
+      <figure class="media">
+        <img src="swordsman-sheet.jpg" alt="The Hollow Swordsman: concept sheet on the left, the Blender model from front, side and back on the right" width="1400" height="518" loading="lazy">
+        <figcaption>Concept sheet and model.</figcaption>
+      </figure>
+
+      <figure class="media">
+        <video src="swordsman-anim-test.mp4" poster="swordsman-anim-test.jpg" width="960" height="720" controls muted playsinline preload="metadata"></video>
+        <figcaption>The game's animations on the new model.</figcaption>
+      </figure>
+
+      <figure class="media narrow">
+        <video src="swordsman-turntable.mp4" poster="swordsman-turntable.jpg" width="480" height="720" autoplay muted loop playsinline preload="metadata"></video>
+        <figcaption>Turntable.</figcaption>
+      </figure>
+
+      <figure class="media">
+        <video src="aura-swords.mp4" poster="aura-swords.jpg" width="960" height="720" autoplay muted loop playsinline preload="metadata"></video>
+        <figcaption>Swords with aura.</figcaption>
+      </figure>
+
+      <h2>Next</h2>
+      <ul>
+        <li>Tune combat and playtest.</li>
+        <li>Bring the new characters and swords into the game.</li>
+        <li>Rebuild the sword schools.</li>
+      </ul>
+    </div>
+  </article>
+
+  <div class="post-foot">
+    <a href="/blog/">← All posts</a>
+    <a href="/hollow/">Hollow</a>
+    <a href="/projects/">Projects</a>
+  </div>
+
+  <footer>
+    <span>© <span id="yr">2026</span> Fotoh Mbaku</span>
+    <span>SELECT * FROM posts;</span>
+  </footer>
+</div>
+<script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
+</body>
+</html>
