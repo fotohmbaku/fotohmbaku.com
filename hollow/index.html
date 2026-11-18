@@ -43,12 +43,20 @@ section.block { padding-block: clamp(2.5rem, 6vw, 3.5rem); border-bottom: 1px so
 section.block h2 { font-size: clamp(1.6rem, 3.5vw, 2.1rem); font-weight: 600; letter-spacing: -0.02em; color: var(--ink); }
 section.block > p { max-width: 40rem; margin: 0.75rem 0 0; color: var(--muted); }
 
-.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1rem; margin-top: 1.5rem; }
-.card { border: 1px solid var(--line); border-top: 3px solid var(--violet); border-radius: 10px; padding: 1rem 1.1rem; }
-.card:nth-child(2) { border-top-color: var(--crimson); }
-.card:nth-child(3) { border-top-color: var(--gold); }
-.card h3 { font-size: 1.1rem; font-weight: 600; }
-.card p { margin: 0.4rem 0 0; color: var(--muted); font-size: 0.95rem; }
+
+.sub { margin-top: 2.25rem; max-width: 46rem; }
+.sub h3 { font-size: 1.2rem; font-weight: 600; color: var(--violet); }
+.sub p, .sub ul { margin: 0.6rem 0 0; }
+.sub ul { padding-left: 1.1rem; }
+.sub li + li { margin-top: 0.4rem; }
+.sub b { font-weight: 600; }
+.table { overflow-x: auto; margin-top: 1rem; border: 1px solid var(--line); border-radius: 10px; }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+th, td { padding: 0.5rem 0.75rem; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+thead th { font: 500 0.72rem/1.3 var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink); background: var(--paper); }
+tbody th { font-weight: 500; color: var(--muted); }
+td { font-variant-numeric: tabular-nums; }
 
 .grid2 { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 1rem; margin-top: 1.5rem; align-items: start; }
 .media { margin: 0; }
@@ -102,12 +110,104 @@ section.block > p { max-width: 40rem; margin: 0.75rem 0 0; color: var(--muted); 
 
   <section class="block" id="combat">
     <h2>Combat</h2>
-    <p>One-on-one duels against AI swordsmen. Every exchange is about stamina.</p>
-    <div class="cards">
-      <div class="card"><h3>Stances</h3><p>Heaven hits hard but guards poorly. Man is balanced. Earth is fast with the best dodge.</p></div>
-      <div class="card"><h3>Stamina</h3><p>Tap guard right after a string to recover most of the stamina it cost. Run dry and you stagger.</p></div>
-      <div class="card"><h3>Countering</h3><p>Readable wind-ups, one counter per stance, and a punish window after each enemy string.</p></div>
-      <div class="card"><h3>Opponents</h3><p>Duelists switch stances, keep their distance, feint and punish missed attacks.</p></div>
+    <p>One-on-one duels against AI swordsmen. Three systems drive every exchange: stamina, stance, and reading the other blade. All numbers below are current values and will change with tuning.</p>
+
+    <div class="sub">
+      <h3>Stamina and breath</h3>
+      <ul>
+        <li><b>Breath Return.</b> Every attack's stamina is held as breath you can win back. Tap guard on the glint, 0.06–0.26 s after a strike ends, to recover 90% of what the whole string spent. Up to 0.9 s late recovers 40%. After that, nothing. A return also cuts the strike's recovery short.</li>
+        <li><b>Stance Flow.</b> Change stance on the glint instead and the breath comes back automatically, with 25% more.</li>
+        <li><b>Passive recovery</b> is slow: 40 per second, 14 while guarding, starting 0.7 s after an attack and never during one.</li>
+        <li><b>Breathless.</b> Run dry and you stagger for 1 s, and blows land 25% harder on you. A guard drained to zero breaks the same way.</li>
+        <li><b>Their ki.</b> Your hits, and your blocked hits, drain the opponent's ki on its own bar. At zero they break and are open to a finishing grab.</li>
+      </ul>
+    </div>
+
+    <div class="sub">
+      <h3>Stances</h3>
+      <p>Heaven is slow and crushing. Man is balanced. Earth is quick and low. Each throws a different kind of blow and trades something away:</p>
+      <div class="table"><table>
+        <thead><tr><th></th><th>Heaven</th><th>Man</th><th>Earth</th></tr></thead>
+        <tbody>
+          <tr><th>Stamina a blocked blow drains</th><td>×1.35</td><td>×0.7</td><td>×1.15</td></tr>
+          <tr><th>Health a blocked blow still takes</th><td>×1.5</td><td>×0.6</td><td>×1.0</td></tr>
+          <tr><th>Just Guard window</th><td>0.10 s</td><td>0.20 s</td><td>0.13 s</td></tr>
+          <tr><th>Dodge stamina</th><td>×1.3</td><td>×1.0</td><td>×0.6</td></tr>
+          <tr><th>Dodge speed</th><td>×0.9</td><td>×1.0</td><td>×1.1</td></tr>
+          <tr><th>Ki your blows drain</th><td>×1.15</td><td>×1.0</td><td>×0.9</td></tr>
+          <tr><th>Walking speed</th><td>×0.94</td><td>×1.0</td><td>×1.08</td></tr>
+        </tbody>
+      </table></div>
+      <p><b>Switch cuts.</b> Change stance mid-string and attack within 0.45 s to throw the new stance's switch cut, which carries straight into its string: <i>Parting Clouds</i> (into Heaven, a rising two-handed diagonal), <i>Threading the Needle</i> (into Man, a stepping thrust) and <i>Sinking Stone</i> (into Earth, a falling diagonal into a low crouch). A string can turn mid-flow onto the opponent's weak side.</p>
+    </div>
+
+    <div class="sub">
+      <h3>Reading and countering</h3>
+      <ul>
+        <li><b>Minimum wind-ups.</b> However fast the opponent, each kind of blow takes at least: slash 0.20 s, thrust 0.26 s, sweep 0.32 s, overhead 0.34 s, grab 0.42 s, perilous (red) 0.50 s.</li>
+        <li><b>The tell.</b> Through the wind-up their blade glows in the colour of the right answer and brightens. It flares 0.22 s before impact, with a spark and a ring. Answer the flare, not the wind-up, and delayed strikes stop working.</li>
+        <li><b>The answers.</b> Parry or guard a slash, dodge into a thrust, dodge aside from an overhead, and use the stance counter on a red blow.</li>
+        <li><b>Punish windows.</b> When an opponent's string ends they are spent: no attacking, no defending. It lasts 0.3 s, or 0.7 s for the quickest fighters, and 0.2 s longer if their last blow missed. A hit in that window is a punish, worth 20% more.</li>
+      </ul>
+      <p>One input counters a red blow, differently in each stance:</p>
+      <div class="table"><table>
+        <thead><tr><th></th><th>Heaven: Meeting the Storm</th><th>Man: Qi Deflect</th><th>Earth: Falling Leaf</th></tr></thead>
+        <tbody>
+          <tr><th>What it does</th><td>Lunges in and breaks the blow head-on</td><td>A wide parry that turns anything aside</td><td>Slips past to their side, untouchable</td></tr>
+          <tr><th>Window</th><td>0.04–0.32 s</td><td>0.05–0.34 s</td><td>0.00–0.30 s</td></tr>
+          <tr><th>Stamina</th><td>12</td><td>4</td><td>6</td></tr>
+          <tr><th>Their ki · opening</th><td>−55 · 1.7 s</td><td>−45 · 1.5 s</td><td>−40 · 1.2 s</td></tr>
+          <tr><th>Against an ordinary blow</th><td>Braced: half damage, keeps lunging</td><td>Parried</td><td>Slipped, no reward</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="sub">
+      <h3>Opponents</h3>
+      <p>Duelists are built to fight like skilled players, with the same tools you have.</p>
+      <ul>
+        <li><b>Stance.</b> In Heaven their wind-ups are 12% longer and hit 20% harder. In Earth they are 12% quicker and 15% lighter. They switch-cut into the stance that beats yours.</li>
+        <li><b>Breath.</b> They return their own breath after a string, winning back 80%. Hit them first and the return is denied. Below 30% ki they give ground until they're back to 60%.</li>
+        <li><b>Spacing.</b> They hover just outside your reach, waiting for you to swing, and step back out after an opening.</li>
+        <li><b>Whiffs.</b> Swing at nothing within 4.5 m of them and they may step in with their quickest blow during your recovery.</li>
+        <li><b>Feints</b> and delayed strikes, scaled by difficulty.</li>
+        <li><b>Best of three.</b> Every arena duel is three rounds. After each round, a tally shows damage, reads, parries, Just Guards, counters, punishes, returns, whiffs, and which of your habits they read.</li>
+      </ul>
+      <div class="table"><table>
+        <thead><tr><th></th><th>Apprentice</th><th>Duelist</th><th>Master</th></tr></thead>
+        <tbody>
+          <tr><th>Deflect and dodge chance</th><td>×0.65</td><td>×1.0</td><td>×1.2</td></tr>
+          <tr><th>Feints</th><td>×0.4</td><td>×1.0</td><td>×1.3</td></tr>
+          <tr><th>Breath returns</th><td>Never</td><td>45% of openings</td><td>85%</td></tr>
+          <tr><th>Punish a whiff</th><td>25%</td><td>60%</td><td>90%</td></tr>
+          <tr><th>Switch cuts</th><td>×0.35</td><td>×1.0</td><td>×1.4</td></tr>
+          <tr><th>Their openings</th><td>×1.4</td><td>×1.0</td><td>×0.85</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="sub">
+      <h3>Hits and dodges</h3>
+      <ul>
+        <li><b>The blade is the hitbox.</b> A cut lands only where the sword actually passes. The blade is swept frame to frame as a thin capsule, from guard to tip, through the strike's active window.</li>
+        <li><b>Hurtboxes</b> follow the body: 1.75 m tall, lowered to 1.0 m in a roll and 1.25 m in a crouch, so a high cut passes over a roll and a low sweep misses a jump.</li>
+        <li><b>I-frames:</b> roll 0.14 s, sidestep 0.12 s, backstep 0.17 s, with stance bonuses (Earth +0.05 s). A dodge only counts when the blade really passes through you, and a dodge only reads a blow within its range plus 0.6 m.</li>
+        <li><b>Step-in.</b> Attackers close the last gap during the wind-up so blades meet bodies instead of landing short.</li>
+      </ul>
+    </div>
+
+    <div class="sub">
+      <h3>Animation</h3>
+      <ul>
+        <li><b>Motion capture.</b> Every attack in the basic kit plays a motion-captured strike, sliced to one cut and fitted to the move's frame data. 145 clips are imported so far. Hand-keyed clips cover switch cuts and the few shapes capture doesn't.</li>
+        <li><b>Planted feet stay planted.</b> Foot sliding during strafes, cuts and turns measured 1.6–4.2 m per sequence before. It now measures 0 m.</li>
+        <li><b>Per-stance movement.</b> Earth dodges in a low skim and sidesteps with a crouched hop. Heaven and Man roll. Changing stance flourishes the blade into the new guard.</li>
+      </ul>
+    </div>
+
+    <div class="sub">
+      <h3>Manuals</h3>
+      <p>A sword manual sets your strings, heavies and dodges. The first, <b>Acrobatic Swordsmanship</b>, mixes sword cuts with capoeira: kicks crack posture and the blade does the cutting. Kicks are traced like blades, so they land where the foot really goes.</p>
     </div>
   </section>
 
