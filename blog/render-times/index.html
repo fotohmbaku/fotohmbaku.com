@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Render Times and Hardware | Fotoh Mbaku</title>
+<meta name="description" content="How long the choreography engine fight films take to render, and the Mac mini they render on.">
+<link rel="canonical" href="https://fotohmbaku.com/blog/render-times/">
+<meta name="author" content="Fotoh Mbaku">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Render Times and Hardware">
+<meta property="og:description" content="How long the choreography engine fight films take to render, and the Mac mini they render on.">
+<meta property="og:url" content="https://fotohmbaku.com/blog/render-times/">
+<meta property="og:image" content="https://fotohmbaku.com/blog/render-times/share.jpg">
+<meta property="og:image:secure_url" content="https://fotohmbaku.com/blog/render-times/share.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Bar chart of render time per fight film, 9 to 13 minutes each">
+<meta property="og:site_name" content="Fotoh Mbaku">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://fotohmbaku.com/blog/render-times/share.jpg">
+<meta name="twitter:image:alt" content="Bar chart of render time per fight film, 9 to 13 minutes each">
+<meta property="article:published_time" content="2026-11-18">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/blog/blog.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="/">fotohmbaku<span>.com</span></a>
+    <nav aria-label="Pages">
+      <a href="/#experience">Experience</a>
+      <a href="/#education">Education</a>
+      <a href="/projects/">Projects</a>
+      <a href="/blog/" aria-current="page">Blog</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </header>
+
+  <article>
+    <header class="post-head">
+      <div class="label">Hollow devlog · Nov 18, 2026</div>
+      <h1>Render Times and Hardware</h1>
+      <p class="dek">How long the <a href="/blog/choreography-initial-renders/">choreography engine fight films</a> take to render, and the machine they render on.</p>
+      <div class="meta">By Fotoh Mbaku · 1 min read</div>
+    </header>
+
+    <div class="prose">
+      <h2>Device</h2>
+      <ul>
+        <li><b>Machine:</b> Mac mini (Mac18,5)</li>
+        <li><b>Chip:</b> Apple M6. 12-core CPU (2 Super, 4 Performance, 6 Efficiency), 12-core GPU, Metal 4</li>
+        <li><b>Memory:</b> 16 GB</li>
+        <li><b>OS:</b> macOS 27.0</li>
+        <li><b>Renderer:</b> Blender 5.3, EEVEE, 24 samples, 1920×1080, 30 fps</li>
+      </ul>
+
+      <h2>Render times</h2>
+      <div class="table"><table>
+        <thead><tr><th>Film</th><th>Frames</th><th>Length</th><th>Render</th><th>Per frame</th></tr></thead>
+        <tbody><tr><td>First Frost</td><td>727</td><td>24.2 s</td><td>11.4 min</td><td>0.94 s</td></tr><tr><td>Seven Slashes of the Gale</td><td>670</td><td>22.3 s</td><td>11.2 min</td><td>1.00 s</td></tr><tr><td>Falling Leaves</td><td>783</td><td>26.1 s</td><td>12.5 min</td><td>0.96 s</td></tr><tr><td>Winter&#39;s Edge</td><td>704</td><td>23.5 s</td><td>10.5 min</td><td>0.90 s</td></tr><tr><td>The Severing</td><td>556</td><td>18.5 s</td><td>9.1 min</td><td>0.98 s</td></tr><tr><td>Crossfire</td><td>805</td><td>26.8 s</td><td>12.6 min</td><td>0.94 s</td></tr><tr><td><b>Total</b></td><td><b>4245</b></td><td><b>2.4 min</b></td><td><b>67 min</b></td><td><b>0.95 s</b></td></tr></tbody>
+      </table></div>
+      <figure class="media">
+        <img src="render-times.svg" alt="Bar chart of render time per fight film, between 9 and 13 minutes each" width="960" height="380" loading="lazy">
+      </figure>
+      <ul>
+        <li>About 1 second per finished 1080p frame, or roughly 29 minutes of rendering per minute of film.</li>
+        <li>Frames render in 3 Blender processes at once. On this machine 3 is 1.4× faster than 1; 2 gains nothing and 4 is no faster than 3. The process count is capped by memory, at about 1.5 GB each.</li>
+        <li>Encoding the frames and sound to MP4 adds 15–20 s per film.</li>
+        <li>Times are measured from the first to the last rendered frame. Solving the fight and baking cloth beforehand are not included.</li>
+      </ul>
+    </div>
+  </article>
+
+  <div class="post-foot">
+    <a href="/blog/">← All posts</a>
+    <a href="/hollow/">Hollow</a>
+    <a href="/projects/">Projects</a>
+  </div>
+
+  <footer>
+    <span>© <span id="yr">2026</span> Fotoh Mbaku</span>
+    <span>SELECT * FROM posts;</span>
+  </footer>
+</div>
+<script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
+</body>
+</html>
