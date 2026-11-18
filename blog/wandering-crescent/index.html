@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wandering Crescent | Fotoh Mbaku</title>
+<meta name="description" content="The Wandering Crescent cinematic and in-game skill: how they were built from one Blender animation.">
+<link rel="canonical" href="https://fotohmbaku.com/blog/wandering-crescent/">
+<meta name="author" content="Fotoh Mbaku">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Wandering Crescent">
+<meta property="og:description" content="The Wandering Crescent cinematic and in-game skill: how they were built from one Blender animation.">
+<meta property="og:url" content="https://fotohmbaku.com/blog/wandering-crescent/">
+<meta property="og:image" content="https://fotohmbaku.com/blog/wandering-crescent/share.jpg">
+<meta property="og:image:secure_url" content="https://fotohmbaku.com/blog/wandering-crescent/share.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Hollow Swordsman under the Wandering Crescent title card">
+<meta property="og:site_name" content="Fotoh Mbaku">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://fotohmbaku.com/blog/wandering-crescent/share.jpg">
+<meta name="twitter:image:alt" content="The Hollow Swordsman under the Wandering Crescent title card">
+<meta property="article:published_time" content="2026-11-17">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/blog/blog.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="/">fotohmbaku<span>.com</span></a>
+    <nav aria-label="Pages">
+      <a href="/#experience">Experience</a>
+      <a href="/#education">Education</a>
+      <a href="/projects/">Projects</a>
+      <a href="/blog/" aria-current="page">Blog</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </header>
+
+  <article>
+    <header class="post-head">
+      <div class="label">Hollow devlog · Nov 17, 2026</div>
+      <h1>Wandering Crescent</h1>
+      <p class="dek">The Hollow Swordsman's signature attack, made as a cinematic and as a game skill from one Blender animation.</p>
+      <div class="meta">By Fotoh Mbaku · 2 min read</div>
+    </header>
+
+    <div class="prose">
+      <figure class="media">
+        <video src="wandering-crescent.mp4" poster="wandering-crescent.jpg" width="1280" height="720" controls playsinline preload="metadata"></video>
+        <figcaption>Cinematic: 1080p30, 15.7 s, rendered in Blender (EEVEE).</figcaption>
+      </figure>
+
+      <h2>Animation</h2>
+      <ul>
+        <li>Built from the game's own motion-capture clips, dumped from Godot and converted into Blender exactly.</li>
+        <li>Clips are blended in timed segments, with hand IK on the hilt and scabbard, planted feet, and a landing aimed so the blade hits the target.</li>
+        <li>Cape, sash, skirt and hair are extra chain bones, baked as verlet ropes in wind.</li>
+        <li>A timeline file records every event and per-frame sample, shared by the effects, the cameras and the game export.</li>
+      </ul>
+
+      <h2>Choreography</h2>
+      <ul>
+        <li><b>Frames 0–50:</b> low iai stance while the aura gathers.</li>
+        <li><b>50–64:</b> slash 1, a rising draw.</li>
+        <li><b>64–120:</b> slashes 2–4 as three blinks round the target, slash 5 a rising cut, slash 6 a twist in the air.</li>
+        <li><b>120–170:</b> somersault and plunge. Slash 7 strikes the ground: rings, cracks, debris and a shockwave.</li>
+        <li><b>170–330:</b> look back and sheathe.</li>
+      </ul>
+
+      <h2>Rendering</h2>
+      <ul>
+        <li>Toon materials, an ink outline, and Kuwahara brushwork over paper grain in the compositor.</li>
+        <li>Eleven shots, each with its own camera and time map for slow motion.</li>
+        <li>All effects are rebuilt per frame by script: trail, swirl, after-images, ribbons, rings, cracks, rocks and the title.</li>
+        <li>The soundtrack is synthesised by a Python script.</li>
+      </ul>
+
+      <h2>In game</h2>
+      <ul>
+        <li>The skill <b>galeSeven</b> is the first skill of the Acrobatic Swordsmanship manual.</li>
+        <li>The Blender animation is exported back to the game skeleton (round-trip error about 3 microns) and packed as a glTF clip.</li>
+        <li>Nine beats slice the clip, with blinks to set positions round the foe, a homing plunge, and aerial beats that hold height.</li>
+        <li>Covered by an automated test in the Godot suite.</li>
+      </ul>
+      <figure class="media">
+        <video src="ingame.mp4" poster="ingame.jpg" width="1280" height="720" autoplay muted loop playsinline preload="metadata"></video>
+        <figcaption>galeSeven in Training.</figcaption>
+      </figure>
+    </div>
+  </article>
+
+  <div class="post-foot">
+    <a href="/blog/">← All posts</a>
+    <a href="/hollow/">Hollow</a>
+    <a href="/projects/">Projects</a>
+  </div>
+
+  <footer>
+    <span>© <span id="yr">2026</span> Fotoh Mbaku</span>
+    <span>SELECT * FROM posts;</span>
+  </footer>
+</div>
+<script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
+</body>
+</html>
