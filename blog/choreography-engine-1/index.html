@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Choreography Engine: Phase 1 | Fotoh Mbaku</title>
-<meta name="description" content="Phase 1 of the choreography engine: one JSON spec builds a move's animation, game clip, skill data and test.">
+<meta name="description" content="Why HOLLOW needs a choreography engine, and a high-level overview of how phase 1 works.">
 <link rel="canonical" href="https://fotohmbaku.com/blog/choreography-engine-1/">
 <meta name="author" content="Fotoh Mbaku">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Choreography Engine: Phase 1">
-<meta property="og:description" content="Phase 1 of the choreography engine: one JSON spec builds a move's animation, game clip, skill data and test.">
+<meta property="og:description" content="Why HOLLOW needs a choreography engine, and a high-level overview of how phase 1 works.">
 <meta property="og:url" content="https://fotohmbaku.com/blog/choreography-engine-1/">
 <meta property="og:image" content="https://fotohmbaku.com/blog/choreography-engine-1/share.jpg">
 <meta property="og:image:secure_url" content="https://fotohmbaku.com/blog/choreography-engine-1/share.jpg">
@@ -44,46 +44,34 @@
     <header class="post-head">
       <div class="label">Hollow devlog · Nov 17, 2026</div>
       <h1>Choreography Engine: Phase 1</h1>
-      <p class="dek">A move is written once as a JSON spec. The engine builds the body animation, the game clip, the skill's data and a test from it.</p>
-      <div class="meta">By Fotoh Mbaku · 2 min read</div>
+      <p class="dek">Why HOLLOW needs a choreography engine, and how phase 1 works.</p>
+      <div class="meta">By Fotoh Mbaku · 1 min read</div>
     </header>
 
     <div class="prose">
-      <h2>Pipeline</h2>
-      <p>One command: <code>python3 tools/choreo/build.py moves/&lt;move&gt;.json --game</code></p>
-      <ol>
-        <li><b>Dump:</b> exports the clips the spec uses from the game's motion-capture library (Godot).</li>
-        <li><b>Solve:</b> builds the body on the swordsman's rig in Blender. Outputs a baked rig ready for a cinematic, a timeline of events with per-frame hips, chest, head, hands, feet and blade, and the game's in-place clip.</li>
-        <li><b>Game:</b> builds the clip into the game and writes the skill's beats into its data.</li>
-        <li><b>Test:</b> plays the move in the real game and measures it against the spec's targets.</li>
-      </ol>
-
-      <h2>Clip catalogue</h2>
+      <h2>Why it's needed</h2>
       <ul>
-        <li>All 452 library clips are read through the game skeleton and measured per frame: hip height, feet, hands, trunk pitch, roll and facing, and foot contact.</li>
-        <li>Per clip: air time, flips, spins, strikes and their direction, kicks, hands on the ground.</li>
-        <li>Each clip gets tags such as <code>flip_back</code>, <code>airborne</code>, <code>crouch_deep</code>, <code>strike_horizontal_rl</code> and <code>kick</code>.</li>
-        <li>A spec can name a clip or query for one by tags, and refer to frames by detected events (<code>takeoff</code>, <code>apex</code>, <code>touchdown</code>, <code>strike</code>) with offsets.</li>
+        <li>Wandering Crescent and Falling Leaves were each built by hand, with their own scripts for authoring, cloth, export and game data.</li>
+        <li>Every new move meant repeating that work, and choosing motion-capture clips by eye from a library of hundreds.</li>
+        <li>The cinematic, the game clip and the skill's data were separate outputs, so they could drift apart.</li>
+        <li>HOLLOW needs many more moves. They have to be quick to make and consistent between the film and the game.</li>
       </ul>
 
-      <h2>The spec</h2>
+      <h2>How it works</h2>
       <ul>
-        <li><b>events:</b> named frames for effects, cameras, sound and the game.</li>
-        <li><b>body:</b> segments of motion capture, each mapped through a timing curve, with blends and legs from another clip.</li>
-        <li><b>layers:</b> pose mixes, bone rotations and breathing, each in an envelope.</li>
-        <li><b>path:</b> hip height keys, travel along the facing, and sway. Feet stay planted outside the airborne span.</li>
-        <li><b>game:</b> the skill, its beats, their timing and fields.</li>
-        <li><b>targets:</b> what the test checks.</li>
+        <li><b>One spec per move.</b> A JSON file describes the move: which clips to use and when, the body's path through the air, key events, the skill's data, and what the move should achieve.</li>
+        <li><b>A searchable clip library.</b> Every motion-capture clip is analysed and tagged (flips, spins, strikes, crouches, jumps), so a spec can ask for a clip by what it does.</li>
+        <li><b>One build.</b> A single command solves the animation in Blender, then produces the cinematic-ready rig, the game clip and the skill's data from the same source.</li>
+        <li><b>A built-in test.</b> The game plays the move and checks it against the spec's targets, such as height, distance, hits and landing time.</li>
       </ul>
 
-      <h2>First move: Falling Leaves</h2>
-      <p>Falling Leaves is the first move rebuilt from a spec. The game clip it produces is byte-identical to the hand-made one.</p>
+      <h2>Phase 1 result</h2>
+      <p>Falling Leaves was rebuilt from a spec. The game clip it produces is identical to the hand-made one.</p>
       <figure class="media">
         <img src="timeline.svg" alt="Chart of hip height and blade tip height across 252 frames of Falling Leaves, with phases and events marked" width="960" height="420" loading="lazy">
-        <figcaption>The solver's timeline output: hip and blade tip height per frame, with the spec's phases and events.</figcaption>
+        <figcaption>Engine output for Falling Leaves: hip and blade height per frame, with the spec's phases and events.</figcaption>
       </figure>
-      <p>Its test targets: apex at least 4.6 m, at least 2 m back, release above 4 m, one hit, landing 1.2–1.9 s after the hit, ending within 1 m of the start, under 7 s in total.</p>
-      <p>See the result in <a href="/blog/falling-leaves/">Animation Spotlight: Falling Leaves</a>.</p>
+      <p>See the move in <a href="/blog/falling-leaves/">Animation Spotlight: Falling Leaves</a>.</p>
     </div>
   </article>
 
